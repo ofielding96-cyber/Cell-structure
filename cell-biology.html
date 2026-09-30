@@ -1,0 +1,1247 @@
+<title>Cell Biology Revision</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: sticky topic tabs over one panel at a time. Every English line is followed directly by its Spanish line.
+   Palette comes from an H&E stain: hematoxylin blue-violet for structure and controls, eosin pink for Spanish and highlights. */
+:root{
+  --bg:#f4f3fa;--surface:#ffffff;--surface-2:#ebe9f7;--ink:#1c1938;--muted:#57537a;--line:#d8d5ed;
+  --hema:#4636b4;--hema-soft:#e6e2fb;--on-hema:#ffffff;
+  --eosin:#a11f57;--eosin-soft:#fbe4ee;
+  --ok:#17693f;--ok-soft:#dcf3e6;--bad:#a8231b;--bad-soft:#fbe5e3;
+  --c-cyto:#f8e6ef;--c-mem:#b0447a;--c-nuc:#7568d4;--c-nucleolus:#3d3391;--c-mito:#e4805e;--c-ribo:#2a2550;
+  --c-chloro:#4c9a63;--c-vac:#dbe6f7;--c-vac-line:#7d9bd1;--c-wall:#8a9a3b;--c-dna:#3d3391;--c-plasmid:#c22a6c;
+  --c-chrom:#4636b4;--c-water:#3d8ee0;--glow:#ffb020;
+  --f-display:'Bricolage Grotesque','Trebuchet MS',system-ui,sans-serif;
+  --f-body:'Atkinson Hyperlegible','Segoe UI',system-ui,sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#14112a;--surface:#1e1a3b;--surface-2:#2a2550;--ink:#ece9ff;--muted:#aaa5d4;--line:#3a3466;
+    --hema:#a99cff;--hema-soft:#2f2870;--on-hema:#14112a;
+    --eosin:#f38bb5;--eosin-soft:#4a1f37;
+    --ok:#5fd394;--ok-soft:#173a2a;--bad:#ff8a80;--bad-soft:#4a1f1f;
+    --c-cyto:#2b2140;--c-mem:#e58ab6;--c-nuc:#8f84e6;--c-nucleolus:#5b4fc4;--c-mito:#f0906f;--c-ribo:#e9e6ff;
+    --c-chloro:#66c084;--c-vac:#263654;--c-vac-line:#6f8fd0;--c-wall:#b5c65a;--c-dna:#a99cff;--c-plasmid:#ff7fae;
+    --c-chrom:#a99cff;--c-water:#6fb0ff;--glow:#ffb020;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#14112a;--surface:#1e1a3b;--surface-2:#2a2550;--ink:#ece9ff;--muted:#aaa5d4;--line:#3a3466;
+  --hema:#a99cff;--hema-soft:#2f2870;--on-hema:#14112a;
+  --eosin:#f38bb5;--eosin-soft:#4a1f37;
+  --ok:#5fd394;--ok-soft:#173a2a;--bad:#ff8a80;--bad-soft:#4a1f1f;
+  --c-cyto:#2b2140;--c-mem:#e58ab6;--c-nuc:#8f84e6;--c-nucleolus:#5b4fc4;--c-mito:#f0906f;--c-ribo:#e9e6ff;
+  --c-chloro:#66c084;--c-vac:#263654;--c-vac-line:#6f8fd0;--c-wall:#b5c65a;--c-dna:#a99cff;--c-plasmid:#ff7fae;
+  --c-chrom:#a99cff;--c-water:#6fb0ff;--glow:#ffb020;
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);padding-inline:clamp(16px,4vw,32px);padding-block:0 56px}
+.wrap{max-width:1040px;margin-inline:auto}
+h1,h2,h3,h4{font-family:var(--f-display);line-height:1.12;margin:0;text-wrap:balance}
+h1{font-weight:800;font-size:clamp(2.7rem,9vw,4.8rem);letter-spacing:-.03em}
+h2{font-weight:700;font-size:clamp(1.7rem,4.6vw,2.3rem);letter-spacing:-.015em}
+h3{font-weight:650;font-size:1.15rem}
+p{margin:0}
+.en,.es{display:block}
+.es{color:var(--eosin)}
+.no-es .es{display:none}
+.sub{font-size:.95rem;margin-top:2px}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--hema);outline-offset:2px}
+
+/* hero */
+.hero{position:relative;padding-block:34px 22px;display:grid;gap:10px;justify-items:start}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.7;
+  background:
+   radial-gradient(circle at 88% 26%,var(--hema-soft) 0 44px,transparent 45px),
+   radial-gradient(circle at 94% 58%,var(--eosin-soft) 0 70px,transparent 71px),
+   radial-gradient(circle at 78% 70%,var(--hema-soft) 0 22px,transparent 23px),
+   radial-gradient(circle at 70% 18%,var(--eosin-soft) 0 16px,transparent 17px)}
+.kicker{font-family:var(--f-mono);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.h1es{font-family:var(--f-display);font-weight:600;font-size:clamp(1.3rem,4vw,1.9rem)}
+.lede{max-width:62ch}
+.lede.en{margin-top:6px}
+
+/* tabs */
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);display:flex;gap:6px;overflow-x:auto;padding-block:10px;border-bottom:1px solid var(--line);scrollbar-width:thin}
+.tab{flex:0 0 auto;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 14px;cursor:pointer;line-height:1.25;min-width:0}
+.tab .en{font-weight:700;font-size:.95rem}
+.tab .es{font-size:.8rem}
+.tab[aria-selected="true"]{background:var(--hema);border-color:var(--hema);color:var(--on-hema)}
+.tab[aria-selected="true"] .es{color:inherit;opacity:.88}
+
+.panel{padding-block:28px 8px;display:grid;gap:22px}
+.ph{display:grid;gap:8px;max-width:70ch}
+.h2es{font-family:var(--f-display);font-weight:600;font-size:1.2rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:16px}
+.grid>*{min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;display:grid;gap:12px;align-content:start}
+.pts{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.pts li{position:relative;padding-left:18px}
+.pts li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--hema)}
+.pts b{font-weight:700}
+ol.pts{counter-reset:s}
+ol.pts li{padding-left:34px;counter-increment:s}
+ol.pts li::before{content:counter(s);width:24px;height:24px;top:0;border-radius:50%;background:var(--hema-soft);color:var(--hema);font-family:var(--f-mono);font-size:.8rem;font-weight:500;display:grid;place-items:center}
+.tag{display:inline-block;justify-self:start;font-family:var(--f-mono);font-size:.74rem;letter-spacing:.04em;text-transform:uppercase;background:var(--hema-soft);color:var(--hema);border-radius:999px;padding:3px 10px}
+.note{background:var(--eosin-soft);border-radius:10px;padding:12px 14px;display:grid;gap:4px}
+.note strong{font-family:var(--f-display)}
+.formula{font-family:var(--f-mono);background:var(--hema-soft);color:var(--ink);border-radius:10px;padding:14px 16px;display:grid;gap:6px;font-size:1rem;overflow-x:auto}
+.formula .es{font-family:var(--f-body);font-size:.9rem}
+
+/* tables */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:540px;font-size:.95rem}
+th,td{padding:10px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+thead th{background:var(--surface-2);font-family:var(--f-display);font-weight:650}
+tbody tr:last-child>*{border-bottom:0}
+th[scope=row]{font-weight:700}
+td.c,th.c{text-align:center}
+.yes{color:var(--ok);font-weight:700;font-size:1.1rem}
+.no{color:var(--muted)}
+.mono{font-family:var(--f-mono)}
+
+/* tools */
+.tool{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;display:grid;gap:14px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer;line-height:1.25;text-align:left}
+.seg button .en{font-weight:700;font-size:.92rem}
+.seg button .es{font-size:.78rem}
+.seg button[aria-pressed="true"]{background:var(--hema);border-color:var(--hema);color:var(--on-hema)}
+.seg button[aria-pressed="true"] .es{color:inherit;opacity:.88}
+.btn{background:var(--hema);color:var(--on-hema);border:1px solid var(--hema);border-radius:999px;padding:9px 18px;cursor:pointer;font-weight:700;line-height:1.25;text-align:center}
+.btn .es{font-weight:500;font-size:.8rem;color:inherit;opacity:.9}
+.btn.ghost{background:transparent;color:var(--hema)}
+.btn.ghost .es{color:var(--eosin);opacity:1}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:14px}
+.fields>*{min-width:0}
+label{display:grid;gap:4px;font-weight:700;font-size:.92rem}
+label .es{font-weight:400;font-size:.85rem}
+.pair{display:grid;grid-template-columns:minmax(0,1fr) 84px;gap:6px}
+input,select{font:inherit;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:100%;min-width:0}
+input:disabled{opacity:.55;background:var(--surface-2)}
+input[type=range]{padding:0;accent-color:var(--hema)}
+.out{background:var(--hema-soft);border-radius:10px;padding:14px 16px;display:grid;gap:6px}
+.out .big{font-family:var(--f-mono);font-size:1.5rem;font-weight:500;overflow-wrap:anywhere}
+.out .work{font-family:var(--f-mono);font-size:.88rem;color:var(--muted);overflow-wrap:anywhere}
+.out .es{font-size:.92rem}
+.hint{font-size:.9rem;color:var(--muted)}
+
+/* cell explorer */
+.xgrid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:740px){.xgrid{grid-template-columns:minmax(0,1fr)}}
+#cellSvg{width:100%;height:auto;max-height:380px;background:var(--surface-2);border-radius:12px;display:block}
+#cellSvg [data-org]{cursor:pointer}
+#cellSvg [data-org].sel,#cellSvg [data-org]:focus-visible{filter:drop-shadow(0 0 4px var(--glow)) drop-shadow(0 0 2px var(--glow));outline:none}
+.info{background:var(--surface-2);border-radius:12px;padding:16px;display:grid;gap:10px;min-height:190px;align-content:start}
+.info h3{font-size:1.4rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:6px 12px;cursor:pointer;text-align:left;line-height:1.25}
+.chip .en{font-weight:700;font-size:.9rem}
+.chip .es{font-size:.78rem}
+.chip.sel{border-color:var(--hema);box-shadow:inset 0 0 0 2px var(--hema)}
+
+/* cycle */
+#cyKids{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:center}
+@media (max-width:740px){#cyKids{grid-template-columns:minmax(0,1fr)}}
+#cySvg{width:100%;height:auto;background:var(--surface-2);border-radius:12px;display:block}
+.dots{display:flex;gap:8px}
+.dots button{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--bg);cursor:pointer;font-family:var(--f-mono);font-weight:500}
+.dots button[aria-current="step"]{background:var(--hema);border-color:var(--hema);color:var(--on-hema)}
+
+/* simulation */
+#simCv{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.legend{display:flex;flex-wrap:wrap;gap:16px;font-size:.9rem}
+.legend i{display:inline-block;border-radius:50%;vertical-align:middle;margin-right:6px}
+.stats{font-family:var(--f-mono);font-size:.9rem;display:grid;gap:2px}
+
+/* flashcards and quiz */
+.flash{width:100%;min-height:230px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px;cursor:pointer;display:grid;gap:8px;align-content:center;justify-items:center;text-align:center}
+.flash .face-l{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.flash .term{font-family:var(--f-display);font-weight:700;font-size:clamp(1.5rem,5vw,2.1rem);line-height:1.15}
+.flash .term.es{font-weight:600;font-size:clamp(1.15rem,4vw,1.5rem)}
+.flash .def{font-size:1.1rem;max-width:52ch}
+.bar{height:8px;border-radius:99px;background:var(--surface-2);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--hema);border-radius:99px}
+.qhead{display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:space-between;align-items:start;font-family:var(--f-mono);font-size:.85rem;color:var(--muted)}
+.qtext .es{font-family:var(--f-body);font-weight:500;font-size:1rem;margin-top:4px}
+.opts{display:grid;gap:10px}
+.opt{display:grid;grid-template-columns:32px minmax(0,1fr);gap:10px;align-items:start;text-align:left;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer}
+.opt .ltr{font-family:var(--f-mono);font-weight:500;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--hema-soft);color:var(--hema)}
+.opt .es{font-size:.92rem}
+.opt:hover:not(:disabled){border-color:var(--hema)}
+.opt:disabled{cursor:default}
+.opt.ok{background:var(--ok-soft);border-color:var(--ok)}
+.opt.bad{background:var(--bad-soft);border-color:var(--bad)}
+.fb{border-radius:10px;padding:14px 16px;display:grid;gap:6px}
+.fb.ok{background:var(--ok-soft)}
+.fb.bad{background:var(--bad-soft)}
+.fb .verdict{font-family:var(--f-display);font-weight:700}
+.bd{display:grid;gap:8px}
+.bd div{display:grid;grid-template-columns:minmax(0,1fr) 64px;gap:12px;align-items:center}
+
+details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 18px}
+summary{cursor:pointer;font-family:var(--f-display);font-weight:650;font-size:1.05rem}
+details[open] summary{margin-bottom:14px}
+
+footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem}
+@media (prefers-reduced-motion:no-preference){.tab,.opt,.btn,.chip{transition:background .15s,border-color .15s}}
+</style>
+
+<div class="wrap">
+<header class="hero" id="top">
+  <p class="kicker">AQA GCSE Biology 8461 · Topic 1 · Year 11</p>
+  <h1>Cell Biology</h1>
+  <p class="es h1es">Biología celular</p>
+  <p class="en lede">Every key point for the exam, with the Spanish under each English line. Read a topic, try its tool, then test yourself in Practice.</p>
+  <p class="es lede">Todos los puntos clave del examen, con el español debajo de cada línea en inglés. Lee un tema, prueba su herramienta y después ponte a prueba en Práctica.</p>
+  <button class="btn ghost" id="esToggle" type="button" aria-pressed="true">Español: ON</button>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Topics / Temas">
+  <button class="tab" role="tab" id="t-structure" data-tab="structure" aria-controls="p-structure"><span class="en">Cell structure</span><span class="es">Estructura celular</span></button>
+  <button class="tab" role="tab" id="t-special" data-tab="special" aria-controls="p-special"><span class="en">Specialised cells</span><span class="es">Células especializadas</span></button>
+  <button class="tab" role="tab" id="t-micro" data-tab="micro" aria-controls="p-micro"><span class="en">Microscopy</span><span class="es">Microscopía</span></button>
+  <button class="tab" role="tab" id="t-culture" data-tab="culture" aria-controls="p-culture"><span class="en">Microbes</span><span class="es">Microorganismos</span></button>
+  <button class="tab" role="tab" id="t-division" data-tab="division" aria-controls="p-division"><span class="en">Cell division</span><span class="es">División celular</span></button>
+  <button class="tab" role="tab" id="t-transport" data-tab="transport" aria-controls="p-transport"><span class="en">Transport</span><span class="es">Transporte</span></button>
+  <button class="tab" role="tab" id="t-practice" data-tab="practice" aria-controls="p-practice"><span class="en">Practice</span><span class="es">Práctica</span></button>
+</nav>
+
+<main>
+
+<!-- ============ STRUCTURE ============ -->
+<section class="panel" id="p-structure" role="tabpanel" aria-labelledby="t-structure">
+  <div class="ph">
+    <h2>Cell structure</h2><p class="es h2es">Estructura celular</p>
+    <p class="en">All living things are made of cells. Each cell contains sub-cellular structures, and each structure has a job.</p>
+    <p class="es">Todos los seres vivos están formados por células. Cada célula contiene estructuras subcelulares, y cada estructura tiene una función.</p>
+  </div>
+
+  <div class="grid">
+    <article class="card">
+      <div><h3>Eukaryotic cells</h3><p class="es sub">Células eucariotas</p></div>
+      <ul class="pts">
+        <li><span class="en">Animal, plant, fungal and algal cells.</span><span class="es">Células animales, vegetales, de hongos y de algas.</span></li>
+        <li><span class="en">The genetic material is enclosed in a <b>nucleus</b>.</span><span class="es">El material genético está encerrado en un <b>núcleo</b>.</span></li>
+        <li><span class="en">They have a cell membrane and cytoplasm.</span><span class="es">Tienen membrana celular y citoplasma.</span></li>
+        <li><span class="en">Larger than prokaryotic cells.</span><span class="es">Más grandes que las células procariotas.</span></li>
+      </ul>
+    </article>
+    <article class="card">
+      <div><h3>Prokaryotic cells</h3><p class="es sub">Células procariotas</p></div>
+      <ul class="pts">
+        <li><span class="en">Bacteria are prokaryotes, much smaller than eukaryotic cells.</span><span class="es">Las bacterias son procariotas, mucho más pequeñas que las células eucariotas.</span></li>
+        <li><span class="en"><b>No nucleus</b>: the genetic material is a single DNA loop.</span><span class="es"><b>Sin núcleo</b>: el material genético es un solo bucle de ADN.</span></li>
+        <li><span class="en">May have one or more small rings of DNA called <b>plasmids</b>.</span><span class="es">Pueden tener uno o más anillos pequeños de ADN llamados <b>plásmidos</b>.</span></li>
+        <li><span class="en">Have cytoplasm, a cell membrane and a cell wall.</span><span class="es">Tienen citoplasma, membrana celular y pared celular.</span></li>
+      </ul>
+    </article>
+  </div>
+
+  <div class="tool" id="explorer">
+    <div><h3>Cell explorer</h3><p class="es sub">Explorador de células</p></div>
+    <div>
+      <p class="en hint">Choose a cell, then select a part to see what it does.</p>
+      <p class="es hint">Elige una célula y selecciona una parte para ver qué hace.</p>
+    </div>
+    <div class="seg" id="cellSeg" role="group" aria-label="Cell type / Tipo de célula">
+      <button type="button" data-cell="animal" aria-pressed="true"><span class="en">Animal cell</span><span class="es">Célula animal</span></button>
+      <button type="button" data-cell="plant" aria-pressed="false"><span class="en">Plant cell</span><span class="es">Célula vegetal</span></button>
+      <button type="button" data-cell="bact" aria-pressed="false"><span class="en">Bacterium</span><span class="es">Bacteria</span></button>
+    </div>
+    <div class="xgrid">
+      <svg id="cellSvg" viewBox="0 0 420 320" role="group" aria-label="Cell diagram / Diagrama de la célula"></svg>
+      <div class="info" id="orgInfo" aria-live="polite"></div>
+    </div>
+    <div class="chips" id="orgChips"></div>
+  </div>
+
+  <div>
+    <div class="ph" style="margin-bottom:10px"><h3>Which cells have it?</h3><p class="es sub">¿Qué células lo tienen?</p></div>
+    <div class="tw"><table>
+      <thead><tr>
+        <th scope="col"><span class="en">Structure</span><span class="es">Estructura</span></th>
+        <th scope="col" class="c"><span class="en">Animal</span><span class="es">Animal</span></th>
+        <th scope="col" class="c"><span class="en">Plant</span><span class="es">Vegetal</span></th>
+        <th scope="col" class="c"><span class="en">Bacterium</span><span class="es">Bacteria</span></th>
+      </tr></thead>
+      <tbody id="whoTable"></tbody>
+    </table></div>
+  </div>
+
+  <div class="note">
+    <strong><span class="en">Exam tip</span><span class="es">Consejo de examen</span></strong>
+    <span class="en">Learn each structure together with its function. Questions often ask you to explain why a cell has many mitochondria or chloroplasts.</span>
+    <span class="es">Aprende cada estructura junto con su función. Suelen preguntar por qué una célula tiene muchas mitocondrias o cloroplastos.</span>
+  </div>
+</section>
+
+<!-- ============ SPECIALISED ============ -->
+<section class="panel" id="p-special" role="tabpanel" aria-labelledby="t-special" hidden>
+  <div class="ph">
+    <h2>Specialised cells</h2><p class="es h2es">Células especializadas</p>
+    <p class="en"><b>Differentiation</b> is the process by which a cell changes to become specialised for its job. As it differentiates, a cell gains the sub-cellular structures it needs.</p>
+    <p class="es">La <b>diferenciación</b> es el proceso por el cual una célula cambia para especializarse en su función. Al diferenciarse, la célula adquiere las estructuras subcelulares que necesita.</p>
+  </div>
+  <div class="grid">
+    <article class="card">
+      <span class="tag">Animal</span>
+      <div><h3>Most animal cells</h3><p class="es sub">La mayoría de las células animales</p></div>
+      <ul class="pts">
+        <li><span class="en">Differentiate early in the life of the animal.</span><span class="es">Se diferencian pronto en la vida del animal.</span></li>
+        <li><span class="en">In a mature animal, cell division is mainly for repair and replacement.</span><span class="es">En un animal adulto, la división celular sirve sobre todo para reparar y reemplazar células.</span></li>
+      </ul>
+    </article>
+    <article class="card">
+      <span class="tag">Plant / Vegetal</span>
+      <div><h3>Many plant cells</h3><p class="es sub">Muchas células vegetales</p></div>
+      <ul class="pts">
+        <li><span class="en">Keep the ability to differentiate throughout life.</span><span class="es">Conservan la capacidad de diferenciarse durante toda la vida.</span></li>
+        <li><span class="en">This is why a cutting can grow into a whole new plant.</span><span class="es">Por eso un esqueje puede crecer y formar una planta nueva entera.</span></li>
+      </ul>
+    </article>
+  </div>
+
+  <div class="ph"><h3>Adaptations of specialised cells</h3><p class="es sub">Adaptaciones de las células especializadas</p></div>
+  <div class="grid">
+    <article class="card">
+      <span class="tag">Animal</span>
+      <div><h3>Sperm cell</h3><p class="es sub">Espermatozoide</p></div>
+      <ul class="pts">
+        <li><span class="en"><b>Tail</b>: swims to the egg.</span><span class="es"><b>Cola</b>: nada hasta el óvulo.</span></li>
+        <li><span class="en"><b>Many mitochondria</b>: release energy for swimming.</span><span class="es"><b>Muchas mitocondrias</b>: liberan energía para nadar.</span></li>
+        <li><span class="en"><b>Acrosome</b>: holds enzymes that digest the egg’s outer layer.</span><span class="es"><b>Acrosoma</b>: contiene enzimas que digieren la capa externa del óvulo.</span></li>
+        <li><span class="en"><b>Streamlined shape</b>: reduces resistance in the water.</span><span class="es"><b>Forma hidrodinámica</b>: reduce la resistencia en el agua.</span></li>
+      </ul>
+    </article>
+    <article class="card">
+      <span class="tag">Animal</span>
+      <div><h3>Nerve cell</h3><p class="es sub">Neurona (célula nerviosa)</p></div>
+      <ul class="pts">
+        <li><span class="en"><b>Long axon</b>: carries electrical impulses over long distances.</span><span class="es"><b>Axón largo</b>: transporta impulsos eléctricos a larga distancia.</span></li>
+        <li><span class="en"><b>Branched endings (dendrites)</b>: connect to many other nerve cells.</span><span class="es"><b>Extremos ramificados (dendritas)</b>: se conectan con muchas otras neuronas.</span></li>
+      </ul>
+    </article>
+    <article class="card">
+      <span class="tag">Animal</span>
+      <div><h3>Muscle cell</h3><p class="es sub">Célula muscular</p></div>
+      <ul class="pts">
+        <li><span class="en"><b>Protein fibres</b> that can shorten: the cell contracts.</span><span class="es"><b>Fibras de proteína</b> que pueden acortarse: la célula se contrae.</span></li>
+        <li><span class="en"><b>Many mitochondria</b>: release energy for contraction.</span><span class="es"><b>Muchas mitocondrias</b>: liberan la energía para la contracción.</span></li>
+      </ul>
+    </article>
+    <article class="card">
+      <span class="tag">Plant / Vegetal</span>
+      <div><h3>Root hair cell</h3><p class="es sub">Célula del pelo radicular</p></div>
+      <ul class="pts">
+        <li><span class="en"><b>Long hair-like extension</b>: large surface area to absorb water and mineral ions.</span><span class="es"><b>Extensión larga en forma de pelo</b>: gran superficie para absorber agua e iones minerales.</span></li>
+        <li><span class="en"><b>Many mitochondria</b>: release energy for active transport of ions.</span><span class="es"><b>Muchas mitocondrias</b>: liberan energía para el transporte activo de iones.</span></li>
+      </ul>
+    </article>
+    <article class="card">
+      <span class="tag">Plant / Vegetal</span>
+      <div><h3>Xylem cell</h3><p class="es sub">Célula del xilema</p></div>
+      <ul class="pts">
+        <li><span class="en"><b>Hollow tubes</b> of dead cells joined end to end: water flows through easily.</span><span class="es"><b>Tubos huecos</b> de células muertas unidas extremo con extremo: el agua circula con facilidad.</span></li>
+        <li><span class="en"><b>Lignin</b> strengthens the walls and supports the plant.</span><span class="es">La <b>lignina</b> refuerza las paredes y sostiene la planta.</span></li>
+      </ul>
+    </article>
+    <article class="card">
+      <span class="tag">Plant / Vegetal</span>
+      <div><h3>Phloem cell</h3><p class="es sub">Célula del floema</p></div>
+      <ul class="pts">
+        <li><span class="en"><b>Sieve plates</b> with small pores: dissolved sugars pass from cell to cell.</span><span class="es"><b>Placas cribosas</b> con poros pequeños: los azúcares disueltos pasan de una célula a otra.</span></li>
+        <li><span class="en"><b>Companion cells</b> release the energy the phloem needs.</span><span class="es">Las <b>células acompañantes</b> liberan la energía que necesita el floema.</span></li>
+      </ul>
+    </article>
+  </div>
+  <div class="note">
+    <strong><span class="en">Exam tip</span><span class="es">Consejo de examen</span></strong>
+    <span class="en">Write the adaptation and how it helps: “many mitochondria, so more energy is released for swimming”.</span>
+    <span class="es">Escribe la adaptación y cómo ayuda: «muchas mitocondrias, así se libera más energía para nadar».</span>
+  </div>
+</section>
+
+<!-- ============ MICROSCOPY ============ -->
+<section class="panel" id="p-micro" role="tabpanel" aria-labelledby="t-micro" hidden>
+  <div class="ph">
+    <h2>Microscopy</h2><p class="es h2es">Microscopía</p>
+    <p class="en"><b>Magnification</b> is how many times bigger the image is than the real object. <b>Resolution</b> is the ability to see two close points as separate, so a higher resolution shows more detail.</p>
+    <p class="es">El <b>aumento</b> indica cuántas veces es mayor la imagen que el objeto real. La <b>resolución</b> es la capacidad de ver como separados dos puntos cercanos, así que más resolución muestra más detalle.</p>
+  </div>
+
+  <div class="tw"><table>
+    <thead><tr>
+      <th scope="col"></th>
+      <th scope="col"><span class="en">Light microscope</span><span class="es">Microscopio óptico</span></th>
+      <th scope="col"><span class="en">Electron microscope</span><span class="es">Microscopio electrónico</span></th>
+    </tr></thead>
+    <tbody>
+      <tr><th scope="row"><span class="en">Uses</span><span class="es">Usa</span></th>
+        <td><span class="en">Light and lenses</span><span class="es">Luz y lentes</span></td>
+        <td><span class="en">A beam of electrons</span><span class="es">Un haz de electrones</span></td></tr>
+      <tr><th scope="row"><span class="en">Magnification</span><span class="es">Aumento</span></th>
+        <td><span class="en">Lower</span><span class="es">Menor</span></td>
+        <td><span class="en">Much higher</span><span class="es">Mucho mayor</span></td></tr>
+      <tr><th scope="row"><span class="en">Resolution</span><span class="es">Resolución</span></th>
+        <td><span class="en">Lower</span><span class="es">Menor</span></td>
+        <td><span class="en">Higher: shows more detail</span><span class="es">Mayor: muestra más detalle</span></td></tr>
+      <tr><th scope="row"><span class="en">You can see</span><span class="es">Se puede ver</span></th>
+        <td><span class="en">Cells, nuclei, chloroplasts</span><span class="es">Células, núcleos, cloroplastos</span></td>
+        <td><span class="en">Mitochondria, ribosomes, plasmids and fine detail</span><span class="es">Mitocondrias, ribosomas, plásmidos y detalles finos</span></td></tr>
+      <tr><th scope="row"><span class="en">Specimen</span><span class="es">Muestra</span></th>
+        <td><span class="en">Can be living</span><span class="es">Puede estar viva</span></td>
+        <td><span class="en">Usually dead (prepared)</span><span class="es">Normalmente muerta (preparada)</span></td></tr>
+      <tr><th scope="row"><span class="en">Cost and size</span><span class="es">Coste y tamaño</span></th>
+        <td><span class="en">Cheap, small, portable</span><span class="es">Barato, pequeño, portátil</span></td>
+        <td><span class="en">Expensive, large, needs training</span><span class="es">Caro, grande, requiere formación</span></td></tr>
+    </tbody>
+  </table></div>
+  <div>
+    <p class="en">Electron microscopes let scientists see sub-cellular structures in detail, which has helped us understand how cells work.</p>
+    <p class="es">Los microscopios electrónicos permiten ver las estructuras subcelulares en detalle, lo que ha ayudado a entender cómo funcionan las células.</p>
+  </div>
+
+  <div class="grid">
+    <div class="formula">
+      <span>magnification = image size ÷ real size</span>
+      <span>image size = magnification × real size</span>
+      <span>real size = image size ÷ magnification</span>
+      <span class="es">aumento = tamaño de la imagen ÷ tamaño real</span>
+    </div>
+    <div class="tw"><table style="min-width:0">
+      <thead><tr>
+        <th scope="col"><span class="en">Unit</span><span class="es">Unidad</span></th>
+        <th scope="col">Symbol</th>
+        <th scope="col">In metres</th>
+      </tr></thead>
+      <tbody class="mono">
+        <tr><td>centimetre</td><td>cm</td><td>1 × 10<sup>−2</sup> m</td></tr>
+        <tr><td>millimetre</td><td>mm</td><td>1 × 10<sup>−3</sup> m</td></tr>
+        <tr><td>micrometre</td><td>µm</td><td>1 × 10<sup>−6</sup> m</td></tr>
+        <tr><td>nanometre</td><td>nm</td><td>1 × 10<sup>−9</sup> m</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="note">
+    <strong><span class="en">Units</span><span class="es">Unidades</span></strong>
+    <span class="en">1 mm = 1000 µm and 1 µm = 1000 nm. Convert to the same unit before you calculate.</span>
+    <span class="es">1 mm = 1000 µm y 1 µm = 1000 nm. Convierte todo a la misma unidad antes de calcular.</span>
+  </div>
+
+  <div class="tool" id="mgTool">
+    <div><h3>Magnification calculator</h3><p class="es sub">Calculadora de aumento</p></div>
+    <label for="mgTarget"><span class="en">Work out</span><span class="es">Calcular</span>
+      <select id="mgTarget">
+        <option value="mag">Magnification / Aumento</option>
+        <option value="real">Real size / Tamaño real</option>
+        <option value="img">Image size / Tamaño de la imagen</option>
+      </select>
+    </label>
+    <div class="fields">
+      <label for="mgImg"><span class="en">Image size</span><span class="es">Tamaño de la imagen</span>
+        <span class="pair"><input id="mgImg" type="number" inputmode="decimal" min="0" step="any" value="12"><select id="mgImgU" aria-label="Unit"><option>mm</option><option>µm</option><option>nm</option></select></span></label>
+      <label for="mgReal"><span class="en">Real size</span><span class="es">Tamaño real</span>
+        <span class="pair"><input id="mgReal" type="number" inputmode="decimal" min="0" step="any" value="60"><select id="mgRealU" aria-label="Unit"><option>mm</option><option selected>µm</option><option>nm</option></select></span></label>
+      <label for="mgMag"><span class="en">Magnification (×)</span><span class="es">Aumento (×)</span>
+        <input id="mgMag" type="number" inputmode="decimal" min="0" step="any" value="200"></label>
+    </div>
+    <div class="out" aria-live="polite">
+      <div class="big" id="mgOut"></div>
+      <div class="work" id="mgWork"></div>
+    </div>
+    <p class="hint"><span class="en">The starting numbers are an example: a 60 µm cell drawn 12 mm long.</span><span class="es">Los números iniciales son un ejemplo: una célula de 60 µm dibujada con 12 mm de largo.</span></p>
+  </div>
+
+  <details>
+    <summary>Required practical: using a light microscope / Práctica: usar un microscopio óptico</summary>
+    <ol class="pts">
+      <li><span class="en">Place the slide on the stage and clip it in place.</span><span class="es">Coloca la preparación en la platina y sujétala con las pinzas.</span></li>
+      <li><span class="en">Select the lowest-power objective lens.</span><span class="es">Selecciona el objetivo de menor aumento.</span></li>
+      <li><span class="en">Looking from the side, use the coarse focus to move the stage up close to the lens.</span><span class="es">Mirando de lado, usa el tornillo macrométrico para subir la platina hasta cerca de la lente.</span></li>
+      <li><span class="en">Look through the eyepiece and use the coarse focus to move the stage down until the image is roughly in focus.</span><span class="es">Mira por el ocular y baja la platina con el macrométrico hasta que la imagen esté más o menos enfocada.</span></li>
+      <li><span class="en">Adjust the fine focus until the image is sharp.</span><span class="es">Ajusta el micrométrico hasta que la imagen sea nítida.</span></li>
+      <li><span class="en">To see more detail, switch to a higher-power objective and refocus with the fine focus only.</span><span class="es">Para ver más detalle, cambia a un objetivo de mayor aumento y vuelve a enfocar solo con el micrométrico.</span></li>
+      <li><span class="en">Draw what you see with a sharp pencil: clear lines, no shading, labels, and the magnification.</span><span class="es">Dibuja lo que ves con un lápiz bien afilado: líneas claras, sin sombreado, con etiquetas y el aumento.</span></li>
+    </ol>
+  </details>
+</section>
+
+<!-- ============ MICROBES ============ -->
+<section class="panel" id="p-culture" role="tabpanel" aria-labelledby="t-culture" hidden>
+  <div class="ph">
+    <span class="tag">Biology only · Solo Biología</span>
+    <h2>Culturing microorganisms</h2><p class="es h2es">Cultivo de microorganismos</p>
+    <p class="en">Bacteria multiply by <b>binary fission</b> (one cell splits into two), as often as every 20 minutes when they have enough nutrients and a suitable temperature.</p>
+    <p class="es">Las bacterias se multiplican por <b>fisión binaria</b> (una célula se divide en dos), tan a menudo como cada 20 minutos cuando tienen suficientes nutrientes y una temperatura adecuada.</p>
+    <p class="en">Microorganisms are grown in a nutrient broth solution or on agar gel plates. Each bacterium grows into a visible colony.</p>
+    <p class="es">Los microorganismos se cultivan en un caldo nutritivo o en placas de agar. Cada bacteria forma una colonia visible.</p>
+  </div>
+  <div class="grid">
+    <article class="card">
+      <div><h3>Aseptic technique</h3><p class="es sub">Técnica aséptica</p></div>
+      <ul class="pts">
+        <li><span class="en">Sterilise the Petri dishes and culture medium with heat to kill unwanted microorganisms.</span><span class="es">Esteriliza las placas de Petri y el medio de cultivo con calor para matar microorganismos no deseados.</span></li>
+        <li><span class="en">Pass the inoculating loop through a flame before transferring bacteria.</span><span class="es">Pasa el asa de siembra por la llama antes de transferir las bacterias.</span></li>
+        <li><span class="en">Tape the lid on lightly to stop microbes from the air getting in. Do not seal it completely.</span><span class="es">Fija la tapa con cinta para que no entren microbios del aire. No la selles por completo.</span></li>
+        <li><span class="en">Store the dish upside down so condensation does not drip onto the culture.</span><span class="es">Guarda la placa boca abajo para que la condensación no gotee sobre el cultivo.</span></li>
+        <li><span class="en">Incubate at about <b>25 °C</b> in school. Higher temperatures, near 37 °C, could grow pathogens that harm humans.</span><span class="es">Incuba a unos <b>25 °C</b> en el colegio. Temperaturas más altas, cerca de 37 °C, podrían hacer crecer patógenos dañinos para las personas.</span></li>
+      </ul>
+    </article>
+    <article class="card">
+      <div><h3>Testing antibiotics</h3><p class="es sub">Prueba de antibióticos</p></div>
+      <ul class="pts">
+        <li><span class="en">Paper discs soaked in different antibiotics are placed on an agar plate covered with bacteria.</span><span class="es">Se colocan discos de papel empapados en distintos antibióticos sobre una placa de agar cubierta de bacterias.</span></li>
+        <li><span class="en">Where the antibiotic works, a <b>clear zone</b> (zone of inhibition) forms with no bacteria.</span><span class="es">Donde el antibiótico actúa, se forma una <b>zona clara</b> (zona de inhibición) sin bacterias.</span></li>
+        <li><span class="en">A bigger clear zone means a more effective antibiotic.</span><span class="es">Una zona clara más grande significa un antibiótico más eficaz.</span></li>
+        <li><span class="en">Include a control disc with no antibiotic to compare.</span><span class="es">Incluye un disco de control sin antibiótico para comparar.</span></li>
+      </ul>
+    </article>
+  </div>
+
+  <div class="grid">
+    <div class="tool" id="zoneTool">
+      <div><h3>Clear zone area</h3><p class="es sub">Área de la zona clara</p></div>
+      <div class="formula"><span>area = π × r²</span><span>r = diameter ÷ 2</span><span class="es">radio = diámetro ÷ 2</span></div>
+      <div class="fields">
+        <label for="zdA"><span class="en">Antibiotic A diameter (mm)</span><span class="es">Diámetro del antibiótico A (mm)</span><input id="zdA" type="number" inputmode="decimal" min="0" step="any" value="12"></label>
+        <label for="zdB"><span class="en">Antibiotic B diameter (mm)</span><span class="es">Diámetro del antibiótico B (mm)</span><input id="zdB" type="number" inputmode="decimal" min="0" step="any" value="8"></label>
+      </div>
+      <div class="out" aria-live="polite"><div class="big" id="zoneOut"></div><div class="work" id="zoneWork"></div><div id="zoneMsg"></div></div>
+    </div>
+    <div class="tool" id="fissionTool">
+      <div><h3>Bacterial growth</h3><p class="es sub">Crecimiento bacteriano</p></div>
+      <div class="formula"><span>divisions = time ÷ division time</span><span>number = start × 2<sup>divisions</sup></span><span class="es">divisiones = tiempo ÷ tiempo de división</span></div>
+      <div class="fields">
+        <label for="bfN"><span class="en">Starting bacteria</span><span class="es">Bacterias iniciales</span><input id="bfN" type="number" inputmode="numeric" min="1" step="1" value="1"></label>
+        <label for="bfT"><span class="en">Divides every (min)</span><span class="es">Se divide cada (min)</span><input id="bfT" type="number" inputmode="decimal" min="1" step="any" value="20"></label>
+        <label for="bfH"><span class="en">Time (hours)</span><span class="es">Tiempo (horas)</span><input id="bfH" type="number" inputmode="decimal" min="0" step="any" value="3"></label>
+      </div>
+      <div class="out" aria-live="polite"><div class="big" id="bfOut"></div><div class="work" id="bfWork"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIVISION ============ -->
+<section class="panel" id="p-division" role="tabpanel" aria-labelledby="t-division" hidden>
+  <div class="ph">
+    <h2>Cell division and stem cells</h2><p class="es h2es">División celular y células madre</p>
+  </div>
+  <div class="grid">
+    <article class="card">
+      <div><h3>Chromosomes</h3><p class="es sub">Cromosomas</p></div>
+      <ul class="pts">
+        <li><span class="en">The nucleus contains chromosomes. Each is a long, coiled molecule of DNA.</span><span class="es">El núcleo contiene cromosomas. Cada uno es una molécula larga y enrollada de ADN.</span></li>
+        <li><span class="en">A chromosome carries a large number of genes.</span><span class="es">Un cromosoma lleva un gran número de genes.</span></li>
+        <li><span class="en">In body cells the chromosomes are in pairs. Humans have 23 pairs (46 chromosomes).</span><span class="es">En las células del cuerpo los cromosomas están en pares. Los humanos tienen 23 pares (46 cromosomas).</span></li>
+      </ul>
+    </article>
+    <article class="card">
+      <div><h3>Why mitosis matters</h3><p class="es sub">Por qué es importante la mitosis</p></div>
+      <ul class="pts">
+        <li><span class="en">Organisms grow by making more cells with mitosis.</span><span class="es">Los organismos crecen fabricando más células por mitosis.</span></li>
+        <li><span class="en">Damaged cells are replaced (repair).</span><span class="es">Las células dañadas se reemplazan (reparación).</span></li>
+        <li><span class="en">The two new cells are genetically identical to each other and to the parent cell.</span><span class="es">Las dos células nuevas son genéticamente idénticas entre sí y a la célula madre.</span></li>
+      </ul>
+    </article>
+  </div>
+
+  <div class="tool" id="cycleTool">
+    <div><h3>The cell cycle</h3><p class="es sub">El ciclo celular</p></div>
+    <div id="cyKids">
+      <svg id="cySvg" viewBox="0 0 360 200" role="img" aria-label="Cell cycle diagram / Diagrama del ciclo celular"></svg>
+      <div style="display:grid;gap:12px">
+        <div class="dots" id="cyDots" role="group" aria-label="Stage / Etapa"></div>
+        <div id="cyText" aria-live="polite" style="display:grid;gap:6px"></div>
+        <div class="row">
+          <button class="btn ghost" type="button" id="cyPrev"><span class="en">Back</span><span class="es">Atrás</span></button>
+          <button class="btn" type="button" id="cyNext"><span class="en">Next stage</span><span class="es">Siguiente etapa</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ph"><h3>Stem cells</h3><p class="es sub">Células madre</p>
+    <p class="en">A <b>stem cell</b> is an undifferentiated cell that can divide by mitosis to make more cells and can differentiate into other types of cell.</p>
+    <p class="es">Una <b>célula madre</b> es una célula sin diferenciar que puede dividirse por mitosis para formar más células y puede diferenciarse en otros tipos de célula.</p>
+  </div>
+  <div class="grid">
+    <article class="card">
+      <div><h3>Embryonic stem cells</h3><p class="es sub">Células madre embrionarias</p></div>
+      <p class="en">From early human embryos. They can differentiate into <b>any</b> type of cell.</p>
+      <p class="es">De embriones humanos tempranos. Pueden diferenciarse en <b>cualquier</b> tipo de célula.</p>
+    </article>
+    <article class="card">
+      <div><h3>Adult stem cells</h3><p class="es sub">Células madre adultas</p></div>
+      <p class="en">For example in bone marrow. They can form many types of cell, such as blood cells, but not all types.</p>
+      <p class="es">Por ejemplo, en la médula ósea. Pueden formar muchos tipos de célula, como las células de la sangre, pero no todos.</p>
+    </article>
+    <article class="card">
+      <div><h3>Plant meristems</h3><p class="es sub">Meristemos de las plantas</p></div>
+      <p class="en">Found in the tips of roots and shoots. They can make <b>any</b> type of plant cell throughout the life of the plant.</p>
+      <p class="es">Se encuentran en las puntas de raíces y tallos. Pueden formar <b>cualquier</b> tipo de célula vegetal durante toda la vida de la planta.</p>
+    </article>
+  </div>
+  <div class="grid">
+    <article class="card">
+      <div><h3>Medical uses</h3><p class="es sub">Usos médicos</p></div>
+      <ul class="pts">
+        <li><span class="en">Stem cells can replace damaged cells, for example to treat diabetes or paralysis.</span><span class="es">Las células madre pueden reemplazar células dañadas, por ejemplo para tratar la diabetes o la parálisis.</span></li>
+        <li><span class="en"><b>Therapeutic cloning</b>: an embryo with the same genes as the patient is made. Its stem cells are not rejected by the patient’s body.</span><span class="es"><b>Clonación terapéutica</b>: se crea un embrión con los mismos genes que el paciente. Sus células madre no son rechazadas por el cuerpo del paciente.</span></li>
+      </ul>
+    </article>
+    <article class="card">
+      <div><h3>Risks and issues</h3><p class="es sub">Riesgos y cuestiones éticas</p></div>
+      <ul class="pts">
+        <li><span class="en">A virus in the stem cells could be passed to the patient.</span><span class="es">Un virus presente en las células madre podría pasar al paciente.</span></li>
+        <li><span class="en">Cells could divide out of control and form a tumour.</span><span class="es">Las células podrían dividirse sin control y formar un tumor.</span></li>
+        <li><span class="en">Some people object to using embryos on ethical or religious grounds. Others argue that saving lives matters more.</span><span class="es">Algunas personas se oponen al uso de embriones por razones éticas o religiosas. Otras opinan que salvar vidas es más importante.</span></li>
+      </ul>
+    </article>
+    <article class="card">
+      <div><h3>Plant cloning</h3><p class="es sub">Clonación de plantas</p></div>
+      <ul class="pts">
+        <li><span class="en">Meristem cells make clones of plants quickly and cheaply.</span><span class="es">Las células del meristemo permiten clonar plantas de forma rápida y barata.</span></li>
+        <li><span class="en">Rare species can be cloned to protect them from extinction.</span><span class="es">Se pueden clonar especies raras para protegerlas de la extinción.</span></li>
+        <li><span class="en">Crops with useful features, such as disease resistance, can be cloned for farmers.</span><span class="es">Se pueden clonar cultivos con características útiles, como la resistencia a enfermedades, para los agricultores.</span></li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<!-- ============ TRANSPORT ============ -->
+<section class="panel" id="p-transport" role="tabpanel" aria-labelledby="t-transport" hidden>
+  <div class="ph">
+    <h2>Transport in cells</h2><p class="es h2es">Transporte en las células</p>
+  </div>
+  <div class="grid">
+    <article class="card">
+      <div><h3>Diffusion</h3><p class="es sub">Difusión</p></div>
+      <p class="en">The net movement of particles from a region of <b>higher</b> concentration to a region of <b>lower</b> concentration, down the concentration gradient. It is passive: no energy is needed.</p>
+      <p class="es">Movimiento neto de partículas desde una zona de concentración <b>mayor</b> a otra de concentración <b>menor</b>, a favor del gradiente de concentración. Es pasivo: no necesita energía.</p>
+    </article>
+    <article class="card">
+      <div><h3>Osmosis</h3><p class="es sub">Ósmosis</p></div>
+      <p class="en">The net movement of <b>water</b> through a partially permeable membrane, from a dilute solution to a more concentrated solution. It is passive.</p>
+      <p class="es">Movimiento neto de <b>agua</b> a través de una membrana parcialmente permeable, desde una disolución diluida a una más concentrada. Es pasivo.</p>
+    </article>
+    <article class="card">
+      <div><h3>Active transport</h3><p class="es sub">Transporte activo</p></div>
+      <p class="en">Movement of substances from a more dilute to a more concentrated region, <b>against</b> the concentration gradient. It needs energy from respiration.</p>
+      <p class="es">Movimiento de sustancias desde una zona más diluida a otra más concentrada, <b>contra</b> el gradiente de concentración. Necesita energía de la respiración.</p>
+    </article>
+  </div>
+
+  <div class="tw"><table>
+    <thead><tr>
+      <th scope="col"></th>
+      <th scope="col"><span class="en">Diffusion</span><span class="es">Difusión</span></th>
+      <th scope="col"><span class="en">Osmosis</span><span class="es">Ósmosis</span></th>
+      <th scope="col"><span class="en">Active transport</span><span class="es">Transporte activo</span></th>
+    </tr></thead>
+    <tbody>
+      <tr><th scope="row"><span class="en">What moves</span><span class="es">Qué se mueve</span></th>
+        <td><span class="en">Small particles, e.g. oxygen, glucose, urea</span><span class="es">Partículas pequeñas, p. ej. oxígeno, glucosa, urea</span></td>
+        <td><span class="en">Water only</span><span class="es">Solo agua</span></td>
+        <td><span class="en">Any substance, e.g. mineral ions, glucose</span><span class="es">Cualquier sustancia, p. ej. iones minerales, glucosa</span></td></tr>
+      <tr><th scope="row"><span class="en">Direction</span><span class="es">Dirección</span></th>
+        <td><span class="en">High → low concentration</span><span class="es">De mayor a menor concentración</span></td>
+        <td><span class="en">Dilute → concentrated solution</span><span class="es">De disolución diluida a concentrada</span></td>
+        <td><span class="en">Low → high concentration</span><span class="es">De menor a mayor concentración</span></td></tr>
+      <tr><th scope="row"><span class="en">Energy needed</span><span class="es">Energía necesaria</span></th>
+        <td><span class="en">No (passive)</span><span class="es">No (pasivo)</span></td>
+        <td><span class="en">No (passive)</span><span class="es">No (pasivo)</span></td>
+        <td><span class="en">Yes, from respiration</span><span class="es">Sí, de la respiración</span></td></tr>
+      <tr><th scope="row"><span class="en">Example</span><span class="es">Ejemplo</span></th>
+        <td><span class="en">Urea from cells into blood plasma</span><span class="es">Urea de las células al plasma sanguíneo</span></td>
+        <td><span class="en">Water into root hair cells</span><span class="es">Agua hacia las células del pelo radicular</span></td>
+        <td><span class="en">Mineral ions into root hair cells; glucose from the gut into the blood</span><span class="es">Iones minerales hacia los pelos radiculares; glucosa del intestino a la sangre</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="tool" id="simTool">
+    <div><h3>Particle simulator</h3><p class="es sub">Simulador de partículas</p></div>
+    <div class="row">
+      <div class="seg" id="simMode" role="group" aria-label="Mode / Modo">
+        <button type="button" data-simmode="diff" aria-pressed="true"><span class="en">Diffusion</span><span class="es">Difusión</span></button>
+        <button type="button" data-simmode="osm" aria-pressed="false"><span class="en">Osmosis</span><span class="es">Ósmosis</span></button>
+      </div>
+    </div>
+    <canvas id="simCv" width="600" height="260" role="img" aria-label="Particles moving across a membrane / Partículas que cruzan una membrana"></canvas>
+    <div class="legend" id="simLegend"></div>
+    <div class="fields">
+      <label for="simT"><span class="en">Temperature</span><span class="es">Temperatura</span><input id="simT" type="range" min="0.4" max="2.4" step="0.1" value="1"></label>
+      <div class="row" style="align-self:end">
+        <button class="btn" type="button" id="simPlay"></button>
+        <button class="btn ghost" type="button" id="simReset"><span class="en">Reset</span><span class="es">Reiniciar</span></button>
+      </div>
+    </div>
+    <div class="out" aria-live="off"><div class="stats" id="simStats"></div><div id="simMsg"></div></div>
+    <p class="hint"><span class="en">The dashed line is a partially permeable membrane. Raise the temperature: the particles move faster, so the rate goes up.</span><span class="es">La línea discontinua es una membrana parcialmente permeable. Sube la temperatura: las partículas se mueven más rápido y la velocidad aumenta.</span></p>
+  </div>
+
+  <div class="grid">
+    <article class="card">
+      <div><h3>What speeds up diffusion?</h3><p class="es sub">¿Qué acelera la difusión?</p></div>
+      <ul class="pts">
+        <li><span class="en"><b>Steeper concentration gradient</b>: a bigger difference in concentration.</span><span class="es"><b>Gradiente de concentración más pronunciado</b>: mayor diferencia de concentración.</span></li>
+        <li><span class="en"><b>Higher temperature</b>: particles have more energy and move faster.</span><span class="es"><b>Mayor temperatura</b>: las partículas tienen más energía y se mueven más rápido.</span></li>
+        <li><span class="en"><b>Larger surface area</b>: more particles can cross at once.</span><span class="es"><b>Mayor superficie</b>: pueden cruzar más partículas a la vez.</span></li>
+      </ul>
+    </article>
+    <article class="card">
+      <div><h3>Exchange surfaces</h3><p class="es sub">Superficies de intercambio</p></div>
+      <ul class="pts">
+        <li><span class="en">Large surface area.</span><span class="es">Gran superficie.</span></li>
+        <li><span class="en">Thin membrane, so a short diffusion path.</span><span class="es">Membrana delgada, por tanto un camino de difusión corto.</span></li>
+        <li><span class="en">In animals: an efficient blood supply.</span><span class="es">En los animales: un buen suministro de sangre.</span></li>
+        <li><span class="en">For gas exchange in animals: ventilation.</span><span class="es">Para el intercambio de gases en animales: ventilación.</span></li>
+      </ul>
+    </article>
+  </div>
+
+  <div class="tool" id="saTool">
+    <div><h3>Surface area to volume ratio</h3><p class="es sub">Relación superficie-volumen</p></div>
+    <p class="en">A single-celled organism has a large surface area compared with its volume, so diffusion alone can supply its needs. As organisms get bigger the ratio falls, so large multicellular organisms need exchange surfaces and transport systems.</p>
+    <p class="es">Un organismo unicelular tiene mucha superficie en comparación con su volumen, así que la difusión basta para cubrir sus necesidades. A medida que los organismos crecen, la relación disminuye, por eso los organismos multicelulares grandes necesitan superficies de intercambio y sistemas de transporte.</p>
+    <div class="formula"><span>cube: surface area = 6 × side²</span><span>cube: volume = side³</span><span>ratio = surface area ÷ volume</span><span class="es">cubo: superficie = 6 × lado², volumen = lado³</span></div>
+    <label for="saSide"><span class="en">Side length: <b id="saVal">2</b> cm</span><span class="es">Longitud del lado: <b id="saValEs">2</b> cm</span>
+      <input id="saSide" type="range" min="0.5" max="10" step="0.5" value="2"></label>
+    <div class="out" aria-live="polite"><div class="big" id="saOut"></div><div class="work" id="saWork"></div></div>
+    <div class="tw"><table style="min-width:0"><thead><tr><th scope="col">Side / Lado (cm)</th><th scope="col">Surface area / Superficie (cm²)</th><th scope="col">Volume / Volumen (cm³)</th><th scope="col">Ratio / Relación</th></tr></thead><tbody class="mono" id="saTable"></tbody></table></div>
+  </div>
+
+  <div class="tool" id="osmTool">
+    <div><h3>Osmosis practical: potato cylinders</h3><p class="es sub">Práctica de ósmosis: cilindros de patata</p></div>
+    <ul class="pts">
+      <li><span class="en">Cut cylinders of potato of equal size. Weigh each one.</span><span class="es">Corta cilindros de patata del mismo tamaño. Pesa cada uno.</span></li>
+      <li><span class="en">Leave them in sugar solutions of different concentrations, then dry and weigh them again.</span><span class="es">Déjalos en disoluciones de azúcar de distintas concentraciones, sécalos y vuelve a pesarlos.</span></li>
+      <li><span class="en">Plot percentage change in mass against concentration. Where the line crosses 0, there is no net movement of water.</span><span class="es">Representa el porcentaje de cambio de masa frente a la concentración. Donde la línea cruza el 0 no hay movimiento neto de agua.</span></li>
+    </ul>
+    <div class="formula"><span>% change = (final mass − start mass) ÷ start mass × 100</span><span class="es">% de cambio = (masa final − masa inicial) ÷ masa inicial × 100</span></div>
+    <div class="fields">
+      <label for="osS"><span class="en">Start mass (g)</span><span class="es">Masa inicial (g)</span><input id="osS" type="number" inputmode="decimal" min="0" step="any" value="2.5"></label>
+      <label for="osE"><span class="en">Final mass (g)</span><span class="es">Masa final (g)</span><input id="osE" type="number" inputmode="decimal" min="0" step="any" value="2.1"></label>
+    </div>
+    <div class="out" aria-live="polite"><div class="big" id="osOut"></div><div class="work" id="osWork"></div><div id="osMsg"></div></div>
+  </div>
+</section>
+
+<!-- ============ PRACTICE ============ -->
+<section class="panel" id="p-practice" role="tabpanel" aria-labelledby="t-practice" hidden>
+  <div class="ph">
+    <h2>Practice</h2><p class="es h2es">Práctica</p>
+  </div>
+  <div class="seg" id="prSeg" role="group" aria-label="Practice mode / Modo de práctica">
+    <button type="button" data-pr="flash" aria-pressed="true"><span class="en">Flashcards</span><span class="es">Tarjetas</span></button>
+    <button type="button" data-pr="quiz" aria-pressed="false"><span class="en">Quiz</span><span class="es">Cuestionario</span></button>
+  </div>
+
+  <div id="prFlash" class="tool">
+    <div class="qhead"><span id="fcCount"></span><span id="fcKnown"></span></div>
+    <div class="bar"><i id="fcBar" style="width:0%"></i></div>
+    <button class="flash" type="button" id="fcCard" aria-live="polite"></button>
+    <div class="row" id="fcBtns">
+      <button class="btn ghost" type="button" id="fcFlip"><span class="en">Flip</span><span class="es">Girar</span></button>
+      <button class="btn ghost" type="button" id="fcAgain"><span class="en">Again</span><span class="es">Otra vez</span></button>
+      <button class="btn" type="button" id="fcGot"><span class="en">Got it</span><span class="es">Ya me la sé</span></button>
+      <button class="btn ghost" type="button" id="fcShuffle"><span class="en">Shuffle</span><span class="es">Mezclar</span></button>
+    </div>
+    <p class="hint"><span class="en">Tap the card to see the meaning. “Got it” removes the card from the pile.</span><span class="es">Toca la tarjeta para ver el significado. «Ya me la sé» quita la tarjeta del montón.</span></p>
+  </div>
+
+  <div id="prQuiz" class="tool" hidden>
+    <div id="quizBox"></div>
+  </div>
+</section>
+
+</main>
+<footer>
+  <span class="en">Written for AQA GCSE Biology (8461) Topic 1. Check your specification for the exact wording your exam uses.</span>
+  <span class="es">Escrito para el Tema 1 de AQA GCSE Biology (8461). Consulta tu especificación para ver el vocabulario exacto de tu examen.</span>
+</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+function bi(en,es,cls){return '<span class="en'+(cls?' '+cls:'')+'">'+en+'</span><span class="es'+(cls?' '+cls:'')+'" lang="es">'+es+'</span>'}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+function grp(s){var p=s.split(".");return p[0].replace(/\B(?=(\d{3})+(?!\d))/g," ")+(p[1]?"."+p[1]:"")}
+function fmt(n){
+  if(!isFinite(n))return "–";
+  if(n===0)return "0";
+  var a=Math.abs(n);
+  if(a>=1e7||a<1e-3){var s=n.toExponential(3).split("e");return (+s[0])+" × 10<sup>"+(+s[1])+"</sup>"}
+  return grp(String(+n.toPrecision(6)));
+}
+$$(".es").forEach(function(e){e.lang="es"});
+
+/* ---------- language toggle ---------- */
+var esBtn=$("#esToggle");
+function setEs(on){
+  document.documentElement.classList.toggle("no-es",!on);
+  esBtn.setAttribute("aria-pressed",on?"true":"false");
+  esBtn.textContent="Español: "+(on?"ON":"OFF");
+  try{localStorage.setItem("cb-es",on?"1":"0")}catch(e){}
+}
+esBtn.addEventListener("click",function(){setEs(esBtn.getAttribute("aria-pressed")!=="true")});
+try{if(localStorage.getItem("cb-es")==="0")setEs(false)}catch(e){}
+
+/* ---------- cell explorer ---------- */
+var ALL=["animal","plant","bact"];
+var ORG={
+  nucleus:{n:["Nucleus","Núcleo"],f:["Contains the genetic material (DNA) that controls the activities of the cell.","Contiene el material genético (ADN) que controla las actividades de la célula."],i:["animal","plant"]},
+  cytoplasm:{n:["Cytoplasm","Citoplasma"],f:["A gel-like substance where most chemical reactions happen.","Sustancia gelatinosa donde ocurren la mayoría de las reacciones químicas."],i:ALL},
+  membrane:{n:["Cell membrane","Membrana celular"],f:["Controls which substances move into and out of the cell.","Controla qué sustancias entran y salen de la célula."],i:ALL},
+  mito:{n:["Mitochondria","Mitocondrias"],f:["Where aerobic respiration takes place, releasing energy for the cell.","Donde tiene lugar la respiración aeróbica, que libera energía para la célula."],i:["animal","plant"]},
+  ribo:{n:["Ribosomes","Ribosomas"],f:["Where protein synthesis happens: proteins are made here.","Donde se sintetizan las proteínas: aquí se fabrican."],i:ALL},
+  wall:{n:["Cell wall","Pared celular"],f:["Strengthens and supports the cell. In plants and algae it is made of cellulose.","Refuerza y sostiene la célula. En plantas y algas está hecha de celulosa."],i:["plant","bact"]},
+  chloro:{n:["Chloroplasts","Cloroplastos"],f:["Contain chlorophyll, which absorbs light for photosynthesis.","Contienen clorofila, que absorbe la luz para la fotosíntesis."],i:["plant"]},
+  vacuole:{n:["Permanent vacuole","Vacuola permanente"],f:["Filled with cell sap. It helps keep the cell firm.","Llena de savia celular. Ayuda a mantener la célula firme."],i:["plant"]},
+  dna:{n:["Single DNA loop","Bucle de ADN único"],f:["The genetic material of a bacterium. It floats in the cytoplasm because there is no nucleus.","El material genético de la bacteria. Flota en el citoplasma porque no hay núcleo."],i:["bact"]},
+  plasmid:{n:["Plasmid","Plásmido"],f:["A small extra ring of DNA.","Un pequeño anillo extra de ADN."],i:["bact"]}
+};
+var CN={animal:["animal cells","células animales"],plant:["plant cells","células vegetales"],bact:["bacteria","bacterias"]};
+function dots(pts){return '<g data-org="ribo">'+pts.map(function(p){return '<circle cx="'+p[0]+'" cy="'+p[1]+'" r="9" fill="transparent"/><circle cx="'+p[0]+'" cy="'+p[1]+'" r="3.6" fill="var(--c-ribo)"/>'}).join('')+'</g>'}
+function mit(x,y,r,s){s=s||1;return '<g transform="translate('+x+' '+y+') rotate('+r+') scale('+s+')"><ellipse rx="34" ry="16" fill="var(--c-mito)"/><path d="M-22 0 q5.5 -9 11 0 t11 0 t11 0 t11 0" fill="none" stroke="var(--c-cyto)" stroke-width="2.6" stroke-linecap="round"/></g>'}
+function chl(x,y,r,s){s=s||1;return '<g transform="translate('+x+' '+y+') rotate('+r+') scale('+s+')"><ellipse rx="26" ry="14" fill="var(--c-chloro)"/><path d="M-16 -4 h32 M-16 3 h32" stroke="var(--c-cyto)" stroke-opacity=".65" stroke-width="2.5" stroke-linecap="round"/></g>'}
+var CELLS={
+  animal:{items:["nucleus","cytoplasm","membrane","mito","ribo"],svg:
+    '<ellipse data-org="cytoplasm" cx="210" cy="160" rx="188" ry="138" fill="var(--c-cyto)"/>'+
+    '<ellipse data-org="membrane" cx="210" cy="160" rx="188" ry="138" fill="none" stroke="var(--c-mem)" stroke-width="8"/>'+
+    '<g data-org="nucleus"><circle cx="170" cy="150" r="56" fill="var(--c-nuc)"/><circle cx="158" cy="140" r="15" fill="var(--c-nucleolus)"/></g>'+
+    '<g data-org="mito">'+mit(305,105,-25)+mit(290,228,20)+mit(105,240,-10)+'</g>'+
+    dots([[260,150],[255,178],[120,80],[230,68],[330,160],[350,196],[200,252],[160,272],[62,150],[300,60],[80,190],[250,262]])},
+  plant:{items:["wall","membrane","cytoplasm","nucleus","vacuole","chloro","mito","ribo"],svg:
+    '<rect data-org="cytoplasm" x="24" y="24" width="372" height="272" rx="24" fill="var(--c-cyto)"/>'+
+    '<rect data-org="wall" x="18" y="18" width="384" height="284" rx="28" fill="none" stroke="var(--c-wall)" stroke-width="12"/>'+
+    '<rect data-org="membrane" x="26" y="26" width="368" height="268" rx="22" fill="none" stroke="var(--c-mem)" stroke-width="4"/>'+
+    '<ellipse data-org="vacuole" cx="255" cy="165" rx="100" ry="100" fill="var(--c-vac)" stroke="var(--c-vac-line)" stroke-width="2.5"/>'+
+    '<g data-org="nucleus"><circle cx="92" cy="95" r="38" fill="var(--c-nuc)"/><circle cx="84" cy="88" r="11" fill="var(--c-nucleolus)"/></g>'+
+    '<g data-org="chloro">'+chl(75,168,-15)+chl(102,252,10)+chl(215,48,0,.85)+chl(330,48,0,.85)+'</g>'+
+    '<g data-org="mito">'+mit(128,152,20,.55)+mit(345,262,-15,.55)+'</g>'+
+    dots([[48,205],[150,205],[138,232],[190,268],[285,42],[372,120],[374,152],[368,218],[150,62],[160,108]])},
+  bact:{items:["wall","membrane","cytoplasm","dna","plasmid","ribo"],svg:
+    '<rect data-org="cytoplasm" x="40" y="90" width="340" height="140" rx="70" fill="var(--c-cyto)"/>'+
+    '<rect data-org="wall" x="33" y="83" width="354" height="154" rx="77" fill="none" stroke="var(--c-wall)" stroke-width="10"/>'+
+    '<rect data-org="membrane" x="41" y="91" width="338" height="138" rx="69" fill="none" stroke="var(--c-mem)" stroke-width="3"/>'+
+    '<path data-org="dna" d="M130 160 C130 120 180 120 200 140 C230 160 260 120 280 140 C310 165 300 200 265 195 C235 190 220 210 190 200 C160 195 130 200 130 160 Z" fill="none" stroke="var(--c-dna)" stroke-width="4.5" stroke-linejoin="round"/>'+
+    '<g data-org="plasmid"><circle cx="100" cy="195" r="16" fill="transparent"/><circle cx="100" cy="195" r="11" fill="none" stroke="var(--c-plasmid)" stroke-width="3.5"/><circle cx="330" cy="118" r="16" fill="transparent"/><circle cx="330" cy="118" r="11" fill="none" stroke="var(--c-plasmid)" stroke-width="3.5"/></g>'+
+    dots([[150,108],[215,105],[250,215],[335,165],[170,222],[95,140],[345,205],[265,118]])}
+};
+var exp=$("#explorer"),svg=$("#cellSvg"),chips=$("#orgChips"),info=$("#orgInfo");
+var curCell="animal",curOrg="nucleus";
+function drawCell(){
+  svg.innerHTML=CELLS[curCell].svg;
+  $$("[data-org]",svg).forEach(function(el){el.setAttribute("tabindex","0");el.setAttribute("role","button");el.setAttribute("aria-label",ORG[el.dataset.org].n[0]+" / "+ORG[el.dataset.org].n[1])});
+  chips.innerHTML=CELLS[curCell].items.map(function(id){return '<button type="button" class="chip" data-org="'+id+'">'+bi(ORG[id].n[0],ORG[id].n[1])+'</button>'}).join("");
+  pick(CELLS[curCell].items.indexOf(curOrg)>-1?curOrg:CELLS[curCell].items[0]);
+}
+function pick(id){
+  curOrg=id;var o=ORG[id];
+  $$("[data-org]",exp).forEach(function(el){
+    var on=el.dataset.org===id;
+    el.classList.toggle("sel",on);
+    if(el.classList.contains("chip"))el.setAttribute("aria-pressed",on?"true":"false");
+  });
+  var en=o.i.map(function(k){return CN[k][0]}).join(", "),es=o.i.map(function(k){return CN[k][1]}).join(", ");
+  info.innerHTML='<div><h3>'+o.n[0]+'</h3><p class="es sub" lang="es">'+o.n[1]+'</p></div>'+
+    '<div>'+bi(o.f[0],o.f[1])+'</div>'+
+    '<div class="hint">'+bi("Found in: "+en,"Se encuentra en: "+es)+'</div>';
+}
+exp.addEventListener("click",function(e){
+  var seg=e.target.closest("[data-cell]");
+  if(seg){curCell=seg.dataset.cell;$$("[data-cell]",exp).forEach(function(b){b.setAttribute("aria-pressed",b===seg?"true":"false")});drawCell();return}
+  var t=e.target.closest("[data-org]");if(t&&exp.contains(t))pick(t.dataset.org);
+});
+svg.addEventListener("keydown",function(e){
+  if(e.key==="Enter"||e.key===" "){var t=e.target.closest("[data-org]");if(t){e.preventDefault();pick(t.dataset.org)}}
+});
+drawCell();
+
+var who=[["nucleus",1,1,0],["membrane",1,1,1],["cytoplasm",1,1,1],["mito",1,1,0],["ribo",1,1,1],["wall",0,1,1],["chloro",0,1,0],["vacuole",0,1,0],["dna",0,0,1],["plasmid",0,0,1]];
+$("#whoTable").innerHTML=who.map(function(r){
+  var o=ORG[r[0]];
+  return '<tr><th scope="row">'+bi(o.n[0],o.n[1])+'</th>'+r.slice(1).map(function(v){return '<td class="c">'+(v?'<span class="yes" aria-label="Yes / Sí">✓</span>':'<span class="no" aria-label="No">–</span>')+'</td>'}).join("")+'</tr>';
+}).join("");
+$$("#whoTable .es").forEach(function(e){e.lang="es"});
+
+/* ---------- magnification calculator ---------- */
+var UF={"mm":1000,"µm":1,"nm":0.001};
+function calcMag(){
+  var t=$("#mgTarget").value,iU=$("#mgImgU").value,rU=$("#mgRealU").value;
+  var img=parseFloat($("#mgImg").value),real=parseFloat($("#mgReal").value),mag=parseFloat($("#mgMag").value);
+  $("#mgImg").disabled=(t==="img");$("#mgReal").disabled=(t==="real");$("#mgMag").disabled=(t==="mag");
+  $("#mgImgU").disabled=false;$("#mgRealU").disabled=false;
+  var need={mag:[img,real],real:[img,mag],img:[real,mag]}[t];
+  var out=$("#mgOut"),work=$("#mgWork");
+  if(!(need[0]>0&&need[1]>0)){out.innerHTML=bi("Enter two positive numbers","Escribe dos números positivos");work.innerHTML="";return}
+  var imgUm=img*UF[iU],realUm=real*UF[rU];
+  if(t==="mag"){
+    var m=imgUm/realUm;
+    out.innerHTML="× "+fmt(m);
+    work.innerHTML=fmt(img)+" "+iU+" = "+fmt(imgUm)+" µm<br>"+fmt(real)+" "+rU+" = "+fmt(realUm)+" µm<br>"+fmt(imgUm)+" ÷ "+fmt(realUm)+" = × "+fmt(m);
+  }else if(t==="real"){
+    var r=imgUm/mag;
+    out.innerHTML=fmt(r/UF[rU])+" "+rU;
+    work.innerHTML=fmt(img)+" "+iU+" = "+fmt(imgUm)+" µm<br>"+fmt(imgUm)+" ÷ "+fmt(mag)+" = "+fmt(r)+" µm<br>= "+fmt(r/UF[rU])+" "+rU;
+  }else{
+    var im=mag*realUm;
+    out.innerHTML=fmt(im/UF[iU])+" "+iU;
+    work.innerHTML=fmt(real)+" "+rU+" = "+fmt(realUm)+" µm<br>"+fmt(mag)+" × "+fmt(realUm)+" = "+fmt(im)+" µm<br>= "+fmt(im/UF[iU])+" "+iU;
+  }
+}
+$$("#mgTool input,#mgTool select").forEach(function(e){e.addEventListener("input",calcMag);e.addEventListener("change",calcMag)});
+calcMag();
+
+/* ---------- microbes ---------- */
+function calcZone(){
+  var a=parseFloat($("#zdA").value),b=parseFloat($("#zdB").value);
+  var out=$("#zoneOut"),work=$("#zoneWork"),msg=$("#zoneMsg");
+  if(!(a>0&&b>0)){out.innerHTML=bi("Enter two positive diameters","Escribe dos diámetros positivos");work.innerHTML="";msg.innerHTML="";return}
+  var ra=a/2,rb=b/2,aa=Math.PI*ra*ra,ab=Math.PI*rb*rb;
+  out.innerHTML="A = "+aa.toFixed(1)+" mm² · B = "+ab.toFixed(1)+" mm²";
+  work.innerHTML="A: π × "+ra+"² = "+aa.toFixed(1)+" mm²<br>B: π × "+rb+"² = "+ab.toFixed(1)+" mm²";
+  if(Math.abs(aa-ab)<0.05)msg.innerHTML=bi("Both clear zones are the same size.","Las dos zonas claras tienen el mismo tamaño.");
+  else msg.innerHTML=aa>ab?bi("Antibiotic A is more effective: a bigger clear zone means more bacteria killed.","El antibiótico A es más eficaz: una zona clara mayor significa que mató más bacterias."):bi("Antibiotic B is more effective: a bigger clear zone means more bacteria killed.","El antibiótico B es más eficaz: una zona clara mayor significa que mató más bacterias.");
+}
+$$("#zoneTool input").forEach(function(e){e.addEventListener("input",calcZone)});calcZone();
+function calcFission(){
+  var n0=parseFloat($("#bfN").value),t=parseFloat($("#bfT").value),h=parseFloat($("#bfH").value);
+  var out=$("#bfOut"),work=$("#bfWork");
+  if(!(n0>=1&&t>0&&h>=0)){out.innerHTML=bi("Enter valid numbers","Escribe números válidos");work.innerHTML="";return}
+  var d=Math.floor((h*60)/t+1e-9),total=n0*Math.pow(2,d);
+  out.innerHTML=fmt(total)+" "+bi("bacteria","bacterias");
+  work.innerHTML=fmt(h*60)+" min ÷ "+fmt(t)+" min = "+d+" divisions<br>"+fmt(n0)+" × 2<sup>"+d+"</sup> = "+fmt(total);
+}
+$$("#fissionTool input").forEach(function(e){e.addEventListener("input",calcFission)});calcFission();
+
+/* ---------- cell cycle ---------- */
+var CY=[
+  {t:["1. Growth","1. Crecimiento"],d:["The cell grows and makes more sub-cellular structures, such as ribosomes and mitochondria.","La célula crece y fabrica más estructuras subcelulares, como ribosomas y mitocondrias."]},
+  {t:["2. DNA replication","2. Replicación del ADN"],d:["The DNA is copied to form two copies of each chromosome. Each chromosome now looks like an X.","El ADN se copia y forma dos copias de cada cromosoma. Ahora cada cromosoma tiene forma de X."]},
+  {t:["3. Mitosis","3. Mitosis"],d:["One set of chromosomes is pulled to each end of the cell and the nucleus divides.","Un juego de cromosomas es arrastrado a cada extremo de la célula y el núcleo se divide."]},
+  {t:["4. Cytoplasm divides","4. División del citoplasma"],d:["The cytoplasm and cell membranes divide to form two identical cells.","El citoplasma y las membranas celulares se dividen y forman dos células idénticas."]}
+];
+function rod(x,y,a){return '<line x1="'+x+'" y1="'+(y-11)+'" x2="'+x+'" y2="'+(y+11)+'" transform="rotate('+a+' '+x+' '+y+')" stroke="var(--c-chrom)" stroke-width="6" stroke-linecap="round"/>'}
+function xch(x,y,a){return '<g transform="translate('+x+' '+y+') rotate('+a+')" stroke="var(--c-chrom)" stroke-width="5" stroke-linecap="round"><path d="M-7 -12 L7 12 M7 -12 L-7 12"/></g>'}
+function cel(cx,cy,rx,ry){return '<ellipse cx="'+cx+'" cy="'+cy+'" rx="'+rx+'" ry="'+ry+'" fill="var(--c-cyto)" stroke="var(--c-mem)" stroke-width="5"/>'}
+function nuc(cx,cy,r){return '<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="var(--hema-soft)" stroke="var(--c-nuc)" stroke-width="3" stroke-dasharray="6 4"/>'}
+function mt(x,y,r){return '<ellipse cx="'+x+'" cy="'+y+'" rx="13" ry="6" transform="rotate('+r+' '+x+' '+y+')" fill="var(--c-mito)"/>'}
+function rb(x,y){return '<circle cx="'+x+'" cy="'+y+'" r="2.8" fill="var(--c-ribo)"/>'}
+function four(cx,cy,f){var o=[[-13,-6,15],[-3,8,-20],[10,-8,10],[14,6,35]];return o.map(function(p){return f(cx+p[0],cy+p[1],p[2])}).join("")}
+var CYS=[
+  function(){return cel(180,100,64,64)+nuc(180,100,32)+four(180,100,rod)+mt(138,132,20)+mt(222,72,-30)+rb(140,80)+rb(215,130)+rb(150,108)},
+  function(){return cel(180,100,84,84)+nuc(180,100,44)+four(180,100,xch)+mt(122,124,20)+mt(232,150,-20)+mt(238,62,30)+mt(128,68,-10)+mt(180,164,0)+rb(120,98)+rb(240,104)+rb(150,40)+rb(210,42)+rb(160,160)+rb(228,120)},
+  function(){return cel(180,100,130,80)+nuc(98,100,34)+nuc(262,100,34)+four(98,100,rod)+four(262,100,rod)+mt(180,42,0)+mt(180,160,0)+rb(180,80)+rb(180,120)},
+  function(){return cel(96,100,68,68)+cel(264,100,68,68)+nuc(96,100,32)+nuc(264,100,32)+four(96,100,rod)+four(264,100,rod)+mt(60,128,20)+mt(132,70,-30)+mt(228,128,20)+mt(300,70,-30)}
+];
+var cyI=0;
+function cyDraw(){
+  $("#cySvg").innerHTML=CYS[cyI]();
+  $("#cyText").innerHTML='<h3>'+CY[cyI].t[0]+'</h3><p class="es sub" lang="es">'+CY[cyI].t[1]+'</p>'+bi(CY[cyI].d[0],CY[cyI].d[1]);
+  $$("#cyDots button").forEach(function(b,i){if(i===cyI)b.setAttribute("aria-current","step");else b.removeAttribute("aria-current")});
+  $("#cyPrev").disabled=cyI===0;
+  $("#cyNext").disabled=cyI===CY.length-1;
+}
+$("#cyDots").innerHTML=CY.map(function(c,i){return '<button type="button" data-i="'+i+'" aria-label="'+c.t[0]+' / '+c.t[1]+'">'+(i+1)+'</button>'}).join("");
+$("#cyDots").addEventListener("click",function(e){var b=e.target.closest("button");if(b){cyI=+b.dataset.i;cyDraw()}});
+$("#cyPrev").addEventListener("click",function(){if(cyI>0){cyI--;cyDraw()}});
+$("#cyNext").addEventListener("click",function(){if(cyI<CY.length-1){cyI++;cyDraw()}});
+cyDraw();
+
+/* ---------- surface area to volume ---------- */
+function ratioTxt(a){var r=6/a;return (+r.toFixed(2))+" : 1"}
+function calcSA(){
+  var a=parseFloat($("#saSide").value),sa=6*a*a,v=a*a*a;
+  $("#saVal").textContent=a;$("#saValEs").textContent=String(a).replace(".",",");
+  $("#saOut").textContent=ratioTxt(a);
+  $("#saWork").innerHTML="SA = 6 × "+a+"² = "+(+sa.toFixed(2))+" cm²<br>V = "+a+"³ = "+(+v.toFixed(3))+" cm³<br>"+(+sa.toFixed(2))+" ÷ "+(+v.toFixed(3))+" = "+ratioTxt(a);
+}
+$("#saSide").addEventListener("input",calcSA);calcSA();
+$("#saTable").innerHTML=[1,2,3,4,5].map(function(a){return "<tr><td>"+a+"</td><td>"+6*a*a+"</td><td>"+a*a*a+"</td><td>"+ratioTxt(a)+"</td></tr>"}).join("");
+
+/* ---------- potato osmosis ---------- */
+function calcOs(){
+  var s=parseFloat($("#osS").value),e=parseFloat($("#osE").value);
+  var out=$("#osOut"),work=$("#osWork"),msg=$("#osMsg");
+  if(!(s>0&&e>=0)){out.innerHTML=bi("Enter the two masses","Escribe las dos masas");work.innerHTML="";msg.innerHTML="";return}
+  var p=(e-s)/s*100;
+  out.textContent=(p>0?"+":"")+(+p.toFixed(1))+" %";
+  work.innerHTML="("+e+" − "+s+") ÷ "+s+" × 100 = "+(+p.toFixed(1))+" %";
+  if(Math.abs(p)<0.05)msg.innerHTML=bi("No change: no net movement of water. The solution is the same concentration as the potato cells.","Sin cambio: no hay movimiento neto de agua. La disolución tiene la misma concentración que las células de la patata.");
+  else if(p<0)msg.innerHTML=bi("Mass decreased: water left the potato by osmosis. The solution was more concentrated than the cell contents.","La masa disminuyó: el agua salió de la patata por ósmosis. La disolución era más concentrada que el contenido de las células.");
+  else msg.innerHTML=bi("Mass increased: water entered the potato by osmosis. The solution was more dilute than the cell contents.","La masa aumentó: el agua entró en la patata por ósmosis. La disolución era más diluida que el contenido de las células.");
+}
+$$("#osmTool input").forEach(function(e){e.addEventListener("input",calcOs)});calcOs();
+
+/* ---------- particle simulator ---------- */
+var sim=(function(){
+  var cv=$("#simCv"),ctx=cv.getContext("2d");
+  var W=600,H=260,MX=300,R=5;
+  var dpr=Math.min(2,window.devicePixelRatio||1);
+  cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+  var parts=[],mode="diff",speed=1,active=false,paused=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches,raf=0,frame=0,col={};
+  function readColors(){
+    var cs=getComputedStyle(document.documentElement);
+    function g(n){return cs.getPropertyValue(n).trim()}
+    col={solute:g("--hema"),water:g("--c-water"),mem:g("--eosin"),bg:g("--surface"),tint:g("--surface-2")};
+  }
+  function mk(t,x0,x1,n){for(var i=0;i<n;i++)parts.push({t:t,x:x0+Math.random()*(x1-x0),y:8+Math.random()*(H-16),a:Math.random()*6.283})}
+  function reset(){
+    parts=[];
+    if(mode==="diff"){mk("s",12,MX-12,48);mk("s",MX+12,W-12,4)}
+    else{mk("s",12,MX-12,26);mk("w",12,MX-12,34);mk("w",MX+12,W-12,72)}
+    legend();
+    if(active){readColors();draw();stats()}
+  }
+  function legend(){
+    var s='<span><i style="width:12px;height:12px;background:var(--hema)"></i>'+(mode==="diff"?bi("Solute particles","Partículas de soluto"):bi("Solute (cannot cross)","Soluto (no puede cruzar)"))+'</span>';
+    if(mode==="osm")s+='<span><i style="width:8px;height:8px;background:var(--c-water)"></i>'+bi("Water","Agua")+'</span>';
+    $("#simLegend").innerHTML=s;
+  }
+  function step(){
+    var v=2.1*speed;
+    for(var i=0;i<parts.length;i++){
+      var p=parts[i],r=p.t==="s"?R:3.5;
+      p.a+=(Math.random()-.5)*.7;
+      var nx=p.x+Math.cos(p.a)*v,ny=p.y+Math.sin(p.a)*v;
+      if(ny<r||ny>H-r){p.a=-p.a;ny=Math.min(H-r,Math.max(r,ny))}
+      if(nx<r||nx>W-r){p.a=Math.PI-p.a;nx=Math.min(W-r,Math.max(r,nx))}
+      if(mode==="osm"&&p.t==="s"&&((p.x<MX&&nx>=MX)||(p.x>=MX&&nx<MX))){p.a=Math.PI-p.a;nx=p.x}
+      p.x=nx;p.y=ny;
+    }
+  }
+  function draw(){
+    ctx.fillStyle=col.bg;ctx.fillRect(0,0,W,H);
+    ctx.fillStyle=col.tint;ctx.globalAlpha=.35;ctx.fillRect(0,0,MX,H);ctx.globalAlpha=1;
+    ctx.strokeStyle=col.mem;ctx.lineWidth=3;ctx.setLineDash([9,7]);
+    ctx.beginPath();ctx.moveTo(MX,0);ctx.lineTo(MX,H);ctx.stroke();ctx.setLineDash([]);
+    for(var i=0;i<parts.length;i++){
+      var p=parts[i];
+      ctx.beginPath();
+      if(p.t==="s"){ctx.fillStyle=col.solute;ctx.arc(p.x,p.y,R,0,6.283)}
+      else{ctx.fillStyle=col.water;ctx.arc(p.x,p.y,3.2,0,6.283)}
+      ctx.fill();
+    }
+  }
+  function stats(){
+    var c={sL:0,sR:0,wL:0,wR:0};
+    for(var i=0;i<parts.length;i++){var p=parts[i];c[p.t+(p.x<MX?"L":"R")]++}
+    var st="",msg="";
+    if(mode==="diff"){
+      st="<span>"+bi("Solute particles: left "+c.sL+" · right "+c.sR,"Partículas de soluto: izquierda "+c.sL+" · derecha "+c.sR)+"</span>";
+      var d=c.sL-c.sR;
+      if(Math.abs(d)<=6)msg=bi("Nearly balanced. Particles still move both ways, but there is no net movement.","Casi equilibrado. Las partículas siguen moviéndose en ambos sentidos, pero ya no hay movimiento neto.");
+      else msg=bi("Net movement: left → right, from high to low concentration.","Movimiento neto: de izquierda a derecha, de mayor a menor concentración.");
+    }else{
+      st="<span>"+bi("Water: left "+c.wL+" · right "+c.wR,"Agua: izquierda "+c.wL+" · derecha "+c.wR)+"</span>";
+      var w=c.wR-c.wL;
+      if(w>6)msg=bi("Net movement of water: right → left, from the dilute side to the concentrated (solute) side.","Movimiento neto de agua: de derecha a izquierda, del lado diluido al lado concentrado (con soluto).");
+      else msg=bi("Water now moves both ways at the same rate. The solute side has gained water.","El agua ahora se mueve en ambos sentidos a la misma velocidad. El lado con soluto ha ganado agua.");
+    }
+    $("#simStats").innerHTML=st;$("#simMsg").innerHTML=msg;
+  }
+  function tick(){
+    if(!active||paused||document.hidden){raf=0;return}
+    step();draw();
+    frame++;
+    if(frame%30===0)readColors();
+    if(frame%8===0)stats();
+    raf=requestAnimationFrame(tick);
+  }
+  function label(){$("#simPlay").innerHTML=paused?bi("Play","Reproducir"):bi("Pause","Pausa")}
+  function start(){active=true;readColors();draw();stats();if(!paused&&!raf)raf=requestAnimationFrame(tick)}
+  function stop(){active=false;if(raf)cancelAnimationFrame(raf);raf=0}
+  $("#simPlay").addEventListener("click",function(){paused=!paused;label();if(!paused&&active&&!raf)raf=requestAnimationFrame(tick)});
+  $("#simReset").addEventListener("click",reset);
+  $("#simT").addEventListener("input",function(e){speed=parseFloat(e.target.value)});
+  $("#simMode").addEventListener("click",function(e){
+    var b=e.target.closest("[data-simmode]");if(!b)return;
+    mode=b.dataset.simmode;
+    $$("#simMode button").forEach(function(x){x.setAttribute("aria-pressed",x===b?"true":"false")});
+    reset();
+  });
+  document.addEventListener("visibilitychange",function(){if(!document.hidden&&active&&!paused&&!raf)raf=requestAnimationFrame(tick)});
+  label();reset();
+  return {start:start,stop:stop};
+})();
+
+/* ---------- flashcards ---------- */
+var FC=[
+  ["Eukaryotic cell","Célula eucariota","A cell whose genetic material is enclosed in a nucleus (animal, plant, fungal and algal cells).","Célula cuyo material genético está encerrado en un núcleo (células animales, vegetales, de hongos y de algas)."],
+  ["Prokaryotic cell","Célula procariota","A small cell with no nucleus. Its DNA is a single loop and it may have plasmids. Bacteria are prokaryotes.","Célula pequeña sin núcleo. Su ADN es un solo bucle y puede tener plásmidos. Las bacterias son procariotas."],
+  ["Nucleus","Núcleo","Contains the DNA and controls the activities of the cell.","Contiene el ADN y controla las actividades de la célula."],
+  ["Mitochondria","Mitocondrias","Where aerobic respiration happens, releasing energy.","Donde ocurre la respiración aeróbica, que libera energía."],
+  ["Ribosome","Ribosoma","Where proteins are made (protein synthesis).","Donde se fabrican las proteínas (síntesis de proteínas)."],
+  ["Cell membrane","Membrana celular","Controls which substances enter and leave the cell.","Controla qué sustancias entran y salen de la célula."],
+  ["Chloroplast","Cloroplasto","Contains chlorophyll. Where photosynthesis happens.","Contiene clorofila. Donde ocurre la fotosíntesis."],
+  ["Permanent vacuole","Vacuola permanente","Contains cell sap and keeps plant cells firm.","Contiene savia celular y mantiene firmes las células vegetales."],
+  ["Plasmid","Plásmido","A small extra ring of DNA found in bacteria.","Pequeño anillo extra de ADN que se encuentra en las bacterias."],
+  ["Differentiation","Diferenciación","The process by which a cell becomes specialised for its job.","Proceso por el cual una célula se especializa para su función."],
+  ["Stem cell","Célula madre","An undifferentiated cell that can divide and become other types of cell.","Célula sin diferenciar que puede dividirse y convertirse en otros tipos de célula."],
+  ["Meristem","Meristemo","Plant tissue at the tips of roots and shoots with stem cells that can make any plant cell type.","Tejido vegetal en las puntas de raíces y tallos, con células madre que pueden formar cualquier tipo de célula vegetal."],
+  ["Magnification","Aumento","How many times larger the image is than the real object. Image size ÷ real size.","Cuántas veces es mayor la imagen que el objeto real. Tamaño de la imagen ÷ tamaño real."],
+  ["Resolution","Resolución","The ability to see two close points as separate. Higher resolution shows more detail.","Capacidad de ver como separados dos puntos cercanos. Más resolución muestra más detalle."],
+  ["Binary fission","Fisión binaria","How bacteria reproduce: one cell divides into two.","Forma en que se reproducen las bacterias: una célula se divide en dos."],
+  ["Aseptic technique","Técnica aséptica","Ways of stopping unwanted microorganisms from contaminating a culture.","Métodos para evitar que microorganismos no deseados contaminen un cultivo."],
+  ["Agar","Agar","A jelly containing nutrients, used to grow microorganisms in Petri dishes.","Gelatina con nutrientes que se usa para cultivar microorganismos en placas de Petri."],
+  ["Chromosome","Cromosoma","A coiled molecule of DNA in the nucleus that carries many genes.","Molécula de ADN enrollada en el núcleo que lleva muchos genes."],
+  ["Mitosis","Mitosis","Cell division that makes two genetically identical cells, for growth and repair.","División celular que produce dos células genéticamente idénticas, para el crecimiento y la reparación."],
+  ["Diffusion","Difusión","The net movement of particles from a higher to a lower concentration.","Movimiento neto de partículas desde una concentración mayor a una menor."],
+  ["Osmosis","Ósmosis","The net movement of water through a partially permeable membrane, from a dilute to a concentrated solution.","Movimiento neto de agua a través de una membrana parcialmente permeable, desde una disolución diluida a una concentrada."],
+  ["Active transport","Transporte activo","Movement of substances against a concentration gradient, using energy from respiration.","Movimiento de sustancias contra un gradiente de concentración, usando energía de la respiración."],
+  ["Concentration gradient","Gradiente de concentración","The difference in concentration between two regions.","Diferencia de concentración entre dos regiones."],
+  ["Partially permeable membrane","Membrana parcialmente permeable","A membrane that lets some substances through but not others.","Membrana que deja pasar algunas sustancias pero no otras."],
+  ["Surface area to volume ratio","Relación superficie-volumen","Surface area ÷ volume. It gets smaller as an organism gets bigger.","Superficie ÷ volumen. Disminuye a medida que el organismo crece."],
+  ["Therapeutic cloning","Clonación terapéutica","Making an embryo with the patient’s genes to get stem cells that will not be rejected.","Crear un embrión con los genes del paciente para obtener células madre que no serán rechazadas."]
+];
+var fc={deck:[],known:0,flip:false};
+function fcReset(){fc.deck=shuffle(FC.map(function(_,i){return i}));fc.known=0;fc.flip=false;fcRender()}
+function fcRender(){
+  var card=$("#fcCard"),total=FC.length;
+  $("#fcCount").innerHTML=bi("Cards left: "+fc.deck.length+" of "+total,"Tarjetas restantes: "+fc.deck.length+" de "+total);
+  $("#fcKnown").innerHTML=bi("Got it: "+fc.known,"Sabidas: "+fc.known);
+  $("#fcBar").style.width=(fc.known/total*100)+"%";
+  var done=fc.deck.length===0;
+  $("#fcBtns").hidden=done;
+  if(done){
+    card.innerHTML='<span class="term en">All done!</span><span class="term es" lang="es">¡Terminado!</span><span class="def en">You knew all '+total+' cards.</span><span class="def es" lang="es">Te sabías las '+total+' tarjetas.</span><span class="btn" style="margin-top:8px">'+bi("Start again","Empezar de nuevo")+'</span>';
+    card.dataset.done="1";return;
+  }
+  card.dataset.done="";
+  var c=FC[fc.deck[0]];
+  if(!fc.flip)card.innerHTML='<span class="face-l">'+bi("Term · tap to flip","Término · toca para girar")+'</span><span class="term en">'+c[0]+'</span><span class="term es" lang="es">'+c[1]+'</span>';
+  else card.innerHTML='<span class="face-l">'+bi("Meaning","Significado")+'</span><span class="def en">'+c[2]+'</span><span class="def es" lang="es">'+c[3]+'</span>';
+}
+$("#fcCard").addEventListener("click",function(){if(this.dataset.done){fcReset();return}fc.flip=!fc.flip;fcRender()});
+$("#fcFlip").addEventListener("click",function(){fc.flip=!fc.flip;fcRender()});
+$("#fcAgain").addEventListener("click",function(){if(fc.deck.length){fc.deck.push(fc.deck.shift());fc.flip=false;fcRender()}});
+$("#fcGot").addEventListener("click",function(){if(fc.deck.length){fc.deck.shift();fc.known++;fc.flip=false;fcRender()}});
+$("#fcShuffle").addEventListener("click",function(){fc.deck=shuffle(fc.deck);fc.flip=false;fcRender()});
+fcReset();
+
+/* ---------- quiz ---------- */
+var QT={structure:["Cell structure","Estructura celular"],special:["Specialised cells","Células especializadas"],micro:["Microscopy","Microscopía"],culture:["Microbes","Microorganismos"],division:["Cell division","División celular"],transport:["Transport","Transporte"]};
+function Q(t,q,o,a,e){return {t:t,q:q,o:o,a:a,e:e}}
+var QS=[
+  Q("structure",["Which part of an animal cell contains the genetic material?","¿Qué parte de una célula animal contiene el material genético?"],[["Nucleus","Núcleo"],["Ribosome","Ribosoma"],["Mitochondrion","Mitocondria"],["Cell membrane","Membrana celular"]],0,["The nucleus contains DNA, which controls the activities of the cell.","El núcleo contiene el ADN, que controla las actividades de la célula."]),
+  Q("structure",["Where does aerobic respiration take place?","¿Dónde tiene lugar la respiración aeróbica?"],[["Mitochondria","Mitocondrias"],["Ribosomes","Ribosomas"],["Nucleus","Núcleo"],["Chloroplasts","Cloroplastos"]],0,["Mitochondria release energy from glucose using oxygen.","Las mitocondrias liberan energía de la glucosa usando oxígeno."]),
+  Q("structure",["Which structure is found in plant cells but not in animal cells?","¿Qué estructura está en las células vegetales pero no en las animales?"],[["Chloroplast","Cloroplasto"],["Mitochondrion","Mitocondria"],["Ribosome","Ribosoma"],["Nucleus","Núcleo"]],0,["Chloroplasts, the cell wall and the permanent vacuole are only in plant cells.","Los cloroplastos, la pared celular y la vacuola permanente solo están en las células vegetales."]),
+  Q("structure",["Which of these is a prokaryotic cell?","¿Cuál de estas es una célula procariota?"],[["A bacterium","Una bacteria"],["A yeast cell","Una célula de levadura"],["A root hair cell","Una célula de pelo radicular"],["A muscle cell","Una célula muscular"]],0,["Bacteria are prokaryotes: no nucleus, and the DNA is a single loop.","Las bacterias son procariotas: no tienen núcleo y su ADN es un solo bucle."]),
+  Q("structure",["What are plasmids?","¿Qué son los plásmidos?"],[["Small rings of DNA in bacteria","Pequeños anillos de ADN en bacterias"],["Proteins made by ribosomes","Proteínas fabricadas por los ribosomas"],["Membranes around the nucleus","Membranas alrededor del núcleo"],["Pigments in chloroplasts","Pigmentos de los cloroplastos"]],0,["Plasmids are extra rings of DNA that some bacteria have.","Los plásmidos son anillos extra de ADN que tienen algunas bacterias."]),
+  Q("special",["A sperm cell has many mitochondria. Why?","Un espermatozoide tiene muchas mitocondrias. ¿Por qué?"],[["To release energy for swimming","Para liberar energía para nadar"],["To store genetic information","Para almacenar información genética"],["To digest the egg’s outer layer","Para digerir la capa externa del óvulo"],["To make the head streamlined","Para que la cabeza sea hidrodinámica"]],0,["Mitochondria release energy. The acrosome holds the digestive enzymes.","Las mitocondrias liberan energía. El acrosoma contiene las enzimas digestivas."]),
+  Q("special",["Which feature helps a nerve cell carry impulses over long distances?","¿Qué característica ayuda a una neurona a transmitir impulsos a larga distancia?"],[["A long axon","Un axón largo"],["Many chloroplasts","Muchos cloroplastos"],["A hollow tube","Un tubo hueco"],["Sieve plates","Placas cribosas"]],0,["The long axon carries electrical impulses from one place to another.","El axón largo transporta los impulsos eléctricos de un lugar a otro."]),
+  Q("special",["Which substance strengthens the walls of xylem vessels?","¿Qué sustancia refuerza las paredes de los vasos del xilema?"],[["Lignin","Lignina"],["Chlorophyll","Clorofila"],["Starch","Almidón"],["Keratin","Queratina"]],0,["Lignin strengthens the walls and supports the plant.","La lignina refuerza las paredes y sostiene la planta."]),
+  Q("micro",["Why can an electron microscope show ribosomes when a light microscope cannot?","¿Por qué un microscopio electrónico muestra ribosomas y uno óptico no?"],[["It has higher magnification and resolution","Tiene mayor aumento y resolución"],["It uses more light","Usa más luz"],["It can view living cells","Puede observar células vivas"],["It is cheaper","Es más barato"]],0,["Electron microscopes have much higher magnification and resolution, so they show tiny sub-cellular structures.","Los microscopios electrónicos tienen mucho más aumento y resolución, por eso muestran estructuras subcelulares diminutas."]),
+  Q("micro",["An image of a cell is 30 mm long. The real cell is 0.15 mm long. What is the magnification?","Una imagen de una célula mide 30 mm. La célula real mide 0,15 mm. ¿Cuál es el aumento?"],[["× 20","× 20"],["× 200","× 200"],["× 2000","× 2000"],["× 0.005","× 0,005"]],1,["Magnification = image size ÷ real size = 30 ÷ 0.15 = 200.","Aumento = tamaño de la imagen ÷ tamaño real = 30 ÷ 0,15 = 200."]),
+  Q("micro",["How many nanometres are in 5 micrometres (5 µm)?","¿Cuántos nanómetros hay en 5 micrómetros (5 µm)?"],[["0.005 nm","0,005 nm"],["50 nm","50 nm"],["5000 nm","5000 nm"],["5 000 000 nm","5 000 000 nm"]],2,["1 µm = 1000 nm, so 5 × 1000 = 5000 nm.","1 µm = 1000 nm, así que 5 × 1000 = 5000 nm."]),
+  Q("culture",["Why are Petri dishes and agar sterilised before use?","¿Por qué se esterilizan las placas de Petri y el agar antes de usarlos?"],[["To kill unwanted microorganisms that could contaminate the culture","Para matar microorganismos no deseados que podrían contaminar el cultivo"],["To make the agar set","Para que el agar se solidifique"],["To warm the bacteria","Para calentar las bacterias"],["To add nutrients","Para añadir nutrientes"]],0,["Sterilising stops unwanted microorganisms from contaminating the culture.","Esterilizar evita que microorganismos no deseados contaminen el cultivo."]),
+  Q("culture",["Why are school cultures incubated at about 25 °C and not 37 °C?","¿Por qué los cultivos escolares se incuban a unos 25 °C y no a 37 °C?"],[["Higher temperatures may grow pathogens that harm humans","Temperaturas más altas pueden hacer crecer patógenos dañinos para las personas"],["Bacteria cannot grow at 37 °C","Las bacterias no pueden crecer a 37 °C"],["Agar melts at 30 °C","El agar se derrite a 30 °C"],["25 °C is body temperature","25 °C es la temperatura corporal"]],0,["At about body temperature, harmful pathogens are more likely to grow.","A una temperatura cercana a la del cuerpo es más probable que crezcan patógenos dañinos."]),
+  Q("culture",["One bacterium divides every 20 minutes. How many bacteria are there after 2 hours?","Una bacteria se divide cada 20 minutos. ¿Cuántas bacterias hay después de 2 horas?"],[["6","6"],["12","12"],["64","64"],["128","128"]],2,["2 hours = 120 min = 6 divisions. 2⁶ = 64.","2 horas = 120 min = 6 divisiones. 2⁶ = 64."]),
+  Q("culture",["A clear zone around an antibiotic disc has a diameter of 10 mm. What is its area?","Una zona clara alrededor de un disco de antibiótico tiene un diámetro de 10 mm. ¿Cuál es su área?"],[["31.4 mm²","31,4 mm²"],["78.5 mm²","78,5 mm²"],["100.0 mm²","100,0 mm²"],["314.2 mm²","314,2 mm²"]],1,["Radius = 5 mm. Area = π × 5² = 78.5 mm².","Radio = 5 mm. Área = π × 5² = 78,5 mm²."]),
+  Q("division",["What happens to the DNA before mitosis begins?","¿Qué le ocurre al ADN antes de que empiece la mitosis?"],[["It is copied (replicated)","Se copia (se replica)"],["It is destroyed","Se destruye"],["It leaves the cell","Sale de la célula"],["It is halved","Se reduce a la mitad"]],0,["The DNA replicates so there are two copies of each chromosome.","El ADN se replica y hay dos copias de cada cromosoma."]),
+  Q("division",["Mitosis produces…","La mitosis produce…"],[["Two genetically identical cells","Dos células genéticamente idénticas"],["Four different cells","Cuatro células distintas"],["Two different cells","Dos células diferentes"],["One larger cell","Una célula más grande"]],0,["Mitosis makes two daughter cells identical to the parent cell.","La mitosis forma dos células hijas idénticas a la célula madre."]),
+  Q("division",["Which cells can differentiate into any type of cell in the human body?","¿Qué células pueden diferenciarse en cualquier tipo de célula del cuerpo humano?"],[["Embryonic stem cells","Células madre embrionarias"],["Adult bone marrow stem cells","Células madre adultas de la médula ósea"],["Red blood cells","Glóbulos rojos"],["Nerve cells","Neuronas"]],0,["Adult stem cells are more limited. Bone marrow makes blood cells, for example.","Las células madre adultas son más limitadas. La médula ósea forma células de la sangre, por ejemplo."]),
+  Q("division",["Where are stem cells found in plants?","¿Dónde se encuentran las células madre en las plantas?"],[["In meristems at the tips of roots and shoots","En los meristemos de las puntas de raíces y tallos"],["In the xylem","En el xilema"],["In the cell wall","En la pared celular"],["In the vacuole","En la vacuola"]],0,["Meristem tissue keeps making new cells throughout the life of the plant.","El tejido meristemático sigue formando células nuevas durante toda la vida de la planta."]),
+  Q("division",["Which is a risk of using stem cells to treat a patient?","¿Cuál es un riesgo de usar células madre para tratar a un paciente?"],[["A virus could be passed to the patient","Se podría transmitir un virus al paciente"],["The cells cannot divide","Las células no pueden dividirse"],["The cells always die","Las células siempre mueren"],["They cannot make proteins","No pueden fabricar proteínas"]],0,["Viruses in the stem cells could infect the patient. Tumours are another risk.","Los virus presentes en las células madre podrían infectar al paciente. Los tumores son otro riesgo."]),
+  Q("transport",["Diffusion is the net movement of particles…","La difusión es el movimiento neto de partículas…"],[["From a higher to a lower concentration","De una concentración mayor a una menor"],["From a lower to a higher concentration, using energy","De una concentración menor a una mayor, usando energía"],["Of water only, through a membrane","Solo de agua, a través de una membrana"],["Only inside living cells","Solo dentro de células vivas"]],0,["Particles move down the concentration gradient. No energy is needed.","Las partículas se mueven a favor del gradiente de concentración. No se necesita energía."]),
+  Q("transport",["Which change will increase the rate of diffusion?","¿Qué cambio aumentará la velocidad de difusión?"],[["A steeper concentration gradient","Un gradiente de concentración más pronunciado"],["A lower temperature","Una temperatura más baja"],["A smaller surface area","Una superficie más pequeña"],["A thicker membrane","Una membrana más gruesa"]],0,["A bigger concentration difference makes diffusion faster.","Una mayor diferencia de concentración hace que la difusión sea más rápida."]),
+  Q("transport",["A potato cylinder is placed in a concentrated sugar solution. What happens to its mass?","Un cilindro de patata se coloca en una disolución concentrada de azúcar. ¿Qué le ocurre a su masa?"],[["It decreases because water leaves by osmosis","Disminuye porque el agua sale por ósmosis"],["It increases because water enters","Aumenta porque entra agua"],["It stays the same","No cambia"],["It decreases because sugar leaves","Disminuye porque sale el azúcar"]],0,["Water moves from the dilute contents of the potato cells to the more concentrated solution.","El agua pasa del contenido diluido de las células de la patata a la disolución más concentrada."]),
+  Q("transport",["Root hair cells absorb mineral ions from dilute soil water. Which process is this?","Las células de los pelos radiculares absorben iones minerales del agua diluida del suelo. ¿Qué proceso es?"],[["Active transport","Transporte activo"],["Diffusion","Difusión"],["Osmosis","Ósmosis"],["Evaporation","Evaporación"]],0,["The ions move against the concentration gradient, which needs energy from respiration.","Los iones se mueven contra el gradiente de concentración, lo que requiere energía de la respiración."]),
+  Q("transport",["A cube has sides of 2 cm. What is its surface area to volume ratio?","Un cubo tiene lados de 2 cm. ¿Cuál es su relación superficie-volumen?"],[["3 : 1","3 : 1"],["6 : 1","6 : 1"],["12 : 1","12 : 1"],["4 : 1","4 : 1"]],0,["SA = 6 × 2² = 24 cm². V = 2³ = 8 cm³. 24 ÷ 8 = 3, so the ratio is 3 : 1.","Superficie = 6 × 2² = 24 cm². Volumen = 2³ = 8 cm³. 24 ÷ 8 = 3, así que la relación es 3 : 1."]),
+  Q("transport",["Why do large multicellular organisms need exchange surfaces and transport systems?","¿Por qué los organismos multicelulares grandes necesitan superficies de intercambio y sistemas de transporte?"],[["Their surface area to volume ratio is too small for diffusion alone","Su relación superficie-volumen es demasiado pequeña para depender solo de la difusión"],["They have no cell membranes","No tienen membranas celulares"],["They do not respire","No respiran"],["They are made of prokaryotic cells","Están formados por células procariotas"]],0,["As an organism gets bigger, its surface area to volume ratio falls.","A medida que el organismo crece, su relación superficie-volumen disminuye."])
+];
+var quiz={list:[],i:0,score:0,res:[],locked:false};
+var qb=$("#quizBox");
+function qHome(){
+  quiz.list=[];
+  qb.innerHTML='<div style="display:grid;gap:14px"><div><h3>Quiz</h3><p class="es sub" lang="es">Cuestionario</p></div>'+
+   '<div>'+bi("Pick how many questions. They come from all six topics in a random order.","Elige cuántas preguntas. Vienen de los seis temas en orden aleatorio.")+'</div>'+
+   '<div class="row"><button type="button" class="btn" data-n="10">'+bi("10 questions","10 preguntas")+'</button><button type="button" class="btn ghost" data-n="'+QS.length+'">'+bi("All "+QS.length+" questions","Las "+QS.length+" preguntas")+'</button></div></div>';
+}
+function qStart(ids){
+  quiz.list=ids.map(function(id){return {id:id,order:shuffle([0,1,2,3])}});
+  quiz.i=0;quiz.score=0;quiz.res=[];quiz.locked=false;qShow();
+}
+function qShow(){
+  if(quiz.i>=quiz.list.length){qEnd();return}
+  var it=quiz.list[quiz.i],q=QS[it.id],n=quiz.list.length;
+  var L="ABCD";
+  qb.innerHTML='<div style="display:grid;gap:14px">'+
+   '<div class="qhead"><span>'+bi("Question "+(quiz.i+1)+" of "+n,"Pregunta "+(quiz.i+1)+" de "+n)+'</span><span class="tag">'+QT[q.t][0]+' · '+QT[q.t][1]+'</span></div>'+
+   '<div class="bar"><i style="width:'+(quiz.i/n*100)+'%"></i></div>'+
+   '<h3 class="qtext"><span class="en">'+q.q[0]+'</span><span class="es" lang="es">'+q.q[1]+'</span></h3>'+
+   '<div class="opts">'+it.order.map(function(oi,k){return '<button type="button" class="opt" data-k="'+oi+'"><span class="ltr">'+L[k]+'</span><span>'+bi(q.o[oi][0],q.o[oi][1])+'</span></button>'}).join("")+'</div>'+
+   '<div id="qFb" aria-live="polite"></div></div>';
+  quiz.locked=false;
+}
+function qAnswer(k){
+  if(quiz.locked)return;quiz.locked=true;
+  var it=quiz.list[quiz.i],q=QS[it.id],ok=(k===q.a);
+  if(ok)quiz.score++;
+  quiz.res.push({id:it.id,t:q.t,ok:ok});
+  $$(".opt",qb).forEach(function(b){
+    var v=+b.dataset.k;b.disabled=true;
+    if(v===q.a)b.classList.add("ok");else if(v===k)b.classList.add("bad");
+  });
+  var last=quiz.i===quiz.list.length-1;
+  $("#qFb").innerHTML='<div class="fb '+(ok?"ok":"bad")+'"><div class="verdict">'+bi(ok?"Correct!":"Not quite.",ok?"¡Correcto!":"No exactamente.")+'</div>'+bi(q.e[0],q.e[1])+
+    '<div style="margin-top:8px"><button type="button" class="btn" id="qNext">'+(last?bi("See results","Ver resultados"):bi("Next question","Siguiente pregunta"))+'</button></div></div>';
+  var nb=$("#qNext");if(nb)nb.focus();
+}
+function qEnd(){
+  var n=quiz.list.length,pc=Math.round(quiz.score/n*100),by={};
+  quiz.res.forEach(function(r){by[r.t]=by[r.t]||{ok:0,n:0};by[r.t].n++;if(r.ok)by[r.t].ok++});
+  var msg=pc>=80?bi("Excellent work!","¡Excelente trabajo!"):pc>=50?bi("Good effort. Review the topics below and try again.","Buen esfuerzo. Repasa los temas de abajo y vuelve a intentarlo."):bi("Keep going. Read the notes again, then retry.","Sigue adelante. Vuelve a leer los apuntes y reinténtalo.");
+  var missed=quiz.res.filter(function(r){return !r.ok}).length;
+  qb.innerHTML='<div style="display:grid;gap:16px"><div><h3>'+bi("Your score","Tu puntuación")+'</h3></div>'+
+   '<div class="out"><div class="big">'+quiz.score+' / '+n+' · '+pc+'%</div>'+msg+'</div>'+
+   '<div class="bd">'+Object.keys(by).map(function(t){var b=by[t];return '<div><span>'+bi(QT[t][0],QT[t][1])+'</span><span class="mono">'+b.ok+' / '+b.n+'</span></div>'}).join("")+'</div>'+
+   '<div class="row">'+(missed?'<button type="button" class="btn" id="qRetry">'+bi("Retry the ones I missed","Repetir las que fallé")+'</button>':"")+'<button type="button" class="btn ghost" id="qNew">'+bi("New round","Nueva ronda")+'</button></div></div>';
+}
+qb.addEventListener("click",function(e){
+  var s=e.target.closest("[data-n]");if(s){qStart(shuffle(QS.map(function(_,i){return i})).slice(0,+s.dataset.n));return}
+  var o=e.target.closest(".opt");if(o){qAnswer(+o.dataset.k);return}
+  if(e.target.closest("#qNext")){quiz.i++;qShow();return}
+  if(e.target.closest("#qRetry")){qStart(quiz.res.filter(function(r){return !r.ok}).map(function(r){return r.id}));return}
+  if(e.target.closest("#qNew")){qHome()}
+});
+qHome();
+
+$("#prSeg").addEventListener("click",function(e){
+  var b=e.target.closest("[data-pr]");if(!b)return;
+  $$("#prSeg button").forEach(function(x){x.setAttribute("aria-pressed",x===b?"true":"false")});
+  $("#prFlash").hidden=b.dataset.pr!=="flash";$("#prQuiz").hidden=b.dataset.pr!=="quiz";
+});
+
+/* ---------- tabs ---------- */
+var tabs=$$(".tab"),panels=$$(".panel"),IDS=tabs.map(function(t){return t.dataset.tab});
+function showTab(id,scroll){
+  tabs.forEach(function(t){var on=t.dataset.tab===id;t.setAttribute("aria-selected",on?"true":"false");t.tabIndex=on?0:-1});
+  panels.forEach(function(p){p.hidden=p.id!=="p-"+id});
+  if(id==="transport")sim.start();else sim.stop();
+  if(scroll){var h=$("#top").offsetHeight;if(window.scrollY>h)window.scrollTo(0,h)}
+}
+tabs.forEach(function(t,i){
+  t.addEventListener("click",function(){showTab(t.dataset.tab,true)});
+  t.addEventListener("keydown",function(e){
+    var j=-1;
+    if(e.key==="ArrowRight")j=(i+1)%tabs.length;else if(e.key==="ArrowLeft")j=(i-1+tabs.length)%tabs.length;
+    if(j>-1){e.preventDefault();tabs[j].focus();showTab(tabs[j].dataset.tab,false)}
+  });
+});
+var h0=(location.hash||"").replace("#","");
+showTab(IDS.indexOf(h0)>-1?h0:"structure",false);
+})();
+</script>
